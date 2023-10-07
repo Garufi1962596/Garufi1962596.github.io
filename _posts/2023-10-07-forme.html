@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html>
-<body>
-<h1>HTML5 Canvas</h1>
-<h2>The arc() Method</h2>
+    <head>
+        <script> 
+            const canvas = document.getElementById("myCanvas"); // To take the canvas element of the html document
+            const ctx = canvas.getContext("2d");  //To get the 2D canvas drawing context
+            
+            var centerX = canvas.width / 2;
+            var centerY = canvas.height / 2;
+            var radius = 50;     // To define the coordinates of the center, of the circle and the radius
+            
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);  //to draw the circle 
+            ctx.stroke();
+        </script>
+    </head>  
 
-<canvas id="myCanvas" width="200" height="120" style="border: #d3d3d3;"></canvas>
+  <body>
 
-<script>
-const canvas = document.getElementById("myCanvas");
-const ctx = canvas.getContext("2d");
+    <canvas id="myCanvas"></canvas>
 
-ctx.beginPath();
-ctx.arc(100,50,50,0,2*Math.PI);
-ctx.stroke();
-</script> 
-
-</body>
+  </body>
 </html>
