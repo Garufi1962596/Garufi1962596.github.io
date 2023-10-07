@@ -5,9 +5,9 @@
             const canvas = document.getElementById("myCanvas"); // To take the canvas element of the html document
             const ctx = canvas.getContext("2d");  //To get the 2D canvas drawing context
             
-            var centerX = canvas.width / 2;
-            var centerY = canvas.height / 2;
-            var radius = 50;     // To define the coordinates of the center, of the circle and the radius
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = 50;     // To define the coordinates of the center, of the circle and the radius
             
             ctx.beginPath();
             ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);  //to draw the circle 
@@ -16,7 +16,7 @@
     </head>  
 
   <body>
-    <h1>Write a program in JavaScript or TypeScript that creates a window containing a single line, point, circle, rectangle.</h1>
+    <h1>Write a program in JavaScript or TypeScript that creates a window containing a single line, point, circle, rectangle</h1>
     <canvas id="myCanvas" width="200" height="200"></canvas>
 
   </body>
