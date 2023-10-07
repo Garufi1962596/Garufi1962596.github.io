@@ -6,18 +6,133 @@
   <body>
     <h1>Write a program in JavaScript or TypeScript that creates a window containing a single line, point, circle, rectangle.</h1>
     <canvas id="myCanvas" width="200" height="200"></canvas>
-    
-        <script> 
+    <canvas id="myCanvas1" width="200" height="200"></canvas>  
+    <canvas id="myCanvas2" width="200" height="200"></canvas>  
+    <canvas id="myCanvas3" width="200" height="200"></canvas>  
+    </br>
+    </br>  
+    <h2> Below is the JavaScript code through which you could draw the different shapes </h2>
+          <pre>
+        <code>
+             &lt;script&gt; 
             const canvas = document.getElementById("myCanvas"); // To take the canvas element of the html document
-            const ctx = canvas.getContext("2d");  //To get the 2D canvas drawing context
+            const canvas1 = document.getElementById("myCanvas1");
+            const canvas2 = document.getElementById("myCanvas2");
+            const canvas3 = document.getElementById("myCanvas3");
             
+            const ctx = canvas.getContext("2d");  //To get the 2D canvas drawing context
+            const ctx1 = canvas1.getContext("2d");
+            const ctx2 = canvas2.getContext("2d");
+            const ctx3 = canvas3.getContext("2d");
+
+            //to draw the circle 
             const centerX = canvas.width / 2;
             const centerY = canvas.height / 2;
             const radius = 50;     // To define the coordinates of the center, of the circle and the radius
             
             ctx.beginPath();
-            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);  //to draw the circle 
+            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);  
+
+            // to draw the line 
+            const startX = 0;
+            const startY = canvas1.height / 2;
+            const endX = canvas1.width;
+            const endY = canvas1.height / 2;
+            ctx1.strokeStyle = "green"; // to assign the color
+            ctx1.lineWidth = 3; // to assign the line thickness
+            ctx1.beginPath();
+            ctx1.moveTo(startX, startY); // Move cursor to start point
+            ctx1.lineTo(endX, endY);  // Draw a line to the end point
+
+            // to draw a point 
+            const xPoint = canvas2.width / 2; // X coordinate of the point
+            const yPoint = canvas2.height / 2;  // Y coordinate of the point
+            ctx2.fillStyle = "blue"; //to assign the color
+            ctx2.beginPath();
+            ctx2.arc(xPoint, yPoint, 2, 0, 2 * Math.PI); // to draw a very small circle 
+            ctx2.fill(); //Fill the circle with the specified color
+
+            //to draw a triangle
+            const x1 = 100; //  X coordinate of the first vertex 
+            const y1 = 0;  // Y coordinate of the first vertex
+            const x2 = 0;  // X coordinate of the second vertex
+            const y2 = 150; // Y coordinate of the second vertex
+            const x3 = 200; // X coordinate of the third vertex
+            const y3 = 150; // Y coordinate of the third vertex
+            ctx3.strokeStyle = "red";
+            ctx3.lineWidth = 3;
+            ctx3.beginPath();
+            ctx3.moveTo(x1, y1);
+            ctx3.lineTo(x2, y2);
+            ctx3.lineTo(x3, y3);
+            ctx3.closePath(); //to close the path to form the triangle
+            
+            // to make the outline drawing
             ctx.stroke();
+            ctx1.stroke();
+            ctx2.stroke();
+            ctx3.stroke();
+        &lt;/script&gt;
+        </code>
+    </pre>
+        <script> 
+            const canvas = document.getElementById("myCanvas"); // To take the canvas element of the html document
+            const canvas1 = document.getElementById("myCanvas1");
+            const canvas2 = document.getElementById("myCanvas2");
+            const canvas3 = document.getElementById("myCanvas3");
+            
+            const ctx = canvas.getContext("2d");  //To get the 2D canvas drawing context
+            const ctx1 = canvas1.getContext("2d");
+            const ctx2 = canvas2.getContext("2d");
+            const ctx3 = canvas3.getContext("2d");
+
+            //to draw the circle 
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = 50;     // To define the coordinates of the center, of the circle and the radius
+            
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);  
+
+            // to draw the line 
+            const startX = 0;
+            const startY = canvas1.height / 2;
+            const endX = canvas1.width;
+            const endY = canvas1.height / 2;
+            ctx1.strokeStyle = "green"; // to assign the color
+            ctx1.lineWidth = 3; // to assign the line thickness
+            ctx1.beginPath();
+            ctx1.moveTo(startX, startY); // Move cursor to start point
+            ctx1.lineTo(endX, endY);  // Draw a line to the end point
+
+            // to draw a point 
+            const xPoint = canvas2.width / 2; // X coordinate of the point
+            const yPoint = canvas2.height / 2;  // Y coordinate of the point
+            ctx2.fillStyle = "blue"; //to assign the color
+            ctx2.beginPath();
+            ctx2.arc(xPoint, yPoint, 2, 0, 2 * Math.PI); // to draw a very small circle 
+            ctx2.fill(); //Fill the circle with the specified color
+
+            //to draw a triangle
+            const x1 = 100; //  X coordinate of the first vertex 
+            const y1 = 0;  // Y coordinate of the first vertex
+            const x2 = 0;  // X coordinate of the second vertex
+            const y2 = 150; // Y coordinate of the second vertex
+            const x3 = 200; // X coordinate of the third vertex
+            const y3 = 150; // Y coordinate of the third vertex
+            ctx3.strokeStyle = "red";
+            ctx3.lineWidth = 3;
+            ctx3.beginPath();
+            ctx3.moveTo(x1, y1);
+            ctx3.lineTo(x2, y2);
+            ctx3.lineTo(x3, y3);
+            ctx3.closePath(); //to close the path to form the triangle
+            
+            // to make the outline drawing
+            ctx.stroke();
+            ctx1.stroke();
+            ctx2.stroke();
+            ctx3.stroke();
         </script>
   </body>
 </html>
