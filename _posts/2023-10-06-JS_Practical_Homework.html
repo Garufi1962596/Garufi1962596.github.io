@@ -56,20 +56,14 @@
             ctx2.arc(xPoint, yPoint, 2, 0, 2 * Math.PI); // to draw a very small circle 
             ctx2.fill(); //Fill the circle with the specified color
 
-            //to draw a triangle
-            const x1 = 100; //  X coordinate of the first vertex 
-            const y1 = 0;  // Y coordinate of the first vertex
-            const x2 = 0;  // X coordinate of the second vertex
-            const y2 = 150; // Y coordinate of the second vertex
-            const x3 = 200; // X coordinate of the third vertex
-            const y3 = 150; // Y coordinate of the third vertex
-            ctx3.strokeStyle = "red";
-            ctx3.lineWidth = 3;
+            //to draw a rectangle
+            const x = 100; //  Top left corner x coordinate
+            const y = 100;  // Top left corner y coordinate
+            const width = 200; 
+            const height = 100;
+            ctx.fillStyle = "red";
             ctx3.beginPath();
-            ctx3.moveTo(x1, y1);
-            ctx3.lineTo(x2, y2);
-            ctx3.lineTo(x3, y3);
-            ctx3.closePath(); //to close the path to form the triangle
+            ctx.fillRect(x, y, width, height); // to draw rectagle 
             
             // to make the outline drawing
             ctx.stroke();
@@ -117,20 +111,14 @@
             ctx2.arc(xPoint, yPoint, 2, 0, 2 * Math.PI); // to draw a very small circle 
             ctx2.fill(); //Fill the circle with the specified color
 
-            //to draw a triangle
-            const x1 = 100; //  X coordinate of the first vertex 
-            const y1 = 0;  // Y coordinate of the first vertex
-            const x2 = 0;  // X coordinate of the second vertex
-            const y2 = 150; // Y coordinate of the second vertex
-            const x3 = 200; // X coordinate of the third vertex
-            const y3 = 150; // Y coordinate of the third vertex
-            ctx3.strokeStyle = "red";
-            ctx3.lineWidth = 3;
+            //to draw a rectangle
+            const x = 100; //  Top left corner x coordinate
+            const y = 100;  // Top left corner y coordinate
+            const width = 200; 
+            const height = 200;
+            ctx.fillStyle = "red";
             ctx3.beginPath();
-            ctx3.moveTo(x1, y1);
-            ctx3.lineTo(x2, y2);
-            ctx3.lineTo(x3, y3);
-            ctx3.closePath(); //to close the path to form the triangle
+            ctx.fillRect(x, y, width, height); // to draw rectagle 
             
             // to make the outline drawing
             ctx.stroke();
