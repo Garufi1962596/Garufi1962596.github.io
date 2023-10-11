@@ -1,7 +1,7 @@
 
 # Pratical Homework in VB
 
-## Write a program in C# or VB.NET that creates a window containing a single line, point, circle, rectangle..
+## Write a program in C# or VB.NET that creates a window containing a single line, point, circle, rectangle.
 
 Below you can see an image containing the output of the code and the code itself. If you want to start the project on visual studio click the following link and download the folder [2023-10-06-BB_pratical_homework.zip](https://github.com/Garufi1962596/Garufi1962596.github.io/edit/main/_posts)
 
