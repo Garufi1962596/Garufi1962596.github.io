@@ -5,14 +5,12 @@
 
   <body>
     
-    <a style="color: black; font-size:100px" href=" https://garufi1962596.github.io">HOME PAGE!</a>
+    <a style="color: black; font-size:60px" href=" https://garufi1962596.github.io">HOME PAGE!</a>
     <h1>Write a program in JavaScript or TypeScript that creates a window containing a single line, point, circle, rectangle.</h1>
     <canvas id="myCanvas" width="200" height="200"></canvas>
     <canvas id="myCanvas1" width="200" height="200"></canvas>  
     <canvas id="myCanvas2" width="200" height="200"></canvas>  
     <canvas id="myCanvas3" width="200" height="200"></canvas>  
-    </br>
-    </br>  
     <h2> Below is the JavaScript code through which you could draw the different shapes </h2>
           <pre>
         <code>
@@ -54,14 +52,14 @@
             ctx2.arc(xPoint, yPoint, 2, 0, 2 * Math.PI); // to draw a very small circle 
             ctx2.fill(); //Fill the circle with the specified color
 
-            //to draw a rectangle
-            const x = 0; //  Top left corner x coordinate
+             //to draw a rectangle
+            const x =0; //  Top left corner x coordinate
             const y = 0;  // Top left corner y coordinate
             const width = 200; 
-            const height = 200;
-            ctx.fillStyle = "red";
-            ctx3.beginPath();
-            ctx.fillRect(x, y, width, height); // to draw rectagle 
+            const height = 100;
+            ctx3.strokeStyle = "red";
+            ctx3.lineWidth = 3; // to assign the line thickness
+            ctx3.strokeRect(x, y, width, height); // to draw rectagle 
             
             // to make the outline drawing
             ctx.stroke();
@@ -110,13 +108,13 @@
             ctx2.fill(); //Fill the circle with the specified color
 
             //to draw a rectangle
-            const x = 0; //  Top left corner x coordinate
+            const x =0; //  Top left corner x coordinate
             const y = 0;  // Top left corner y coordinate
             const width = 200; 
             const height = 100;
-            ctx.fillStyle = "red";
-            ctx3.beginPath();
-            ctx.fillRect(x, y, width, height); // to draw rectagle 
+            ctx3.strokeStyle = "red";
+            ctx3.lineWidth = 3; // to assign the line thickness
+            ctx3.strokeRect(x, y, width, height); // to draw rectagle 
             
             // to make the outline drawing
             ctx.stroke();
