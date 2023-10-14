@@ -7,76 +7,92 @@ Below you can see an image containing the output of the code and the code itself
 
 ![it is not possible to view the image please click on the repository link](/VB_HW1.png)
 
-    Imports System.Windows.Forms.AxHost
+    Imports System.Drawing
 
     Public Class Form1
 
-            Private Sub Circle_Click(sender As Object, e As EventArgs) Handles Circle.Click
-                Dim g As Graphics = PictureBoxCircle.CreateGraphics()
+            Private Sub DrawCircle(bitmap As Bitmap)
+                Using g As Graphics = Graphics.FromImage(bitmap)
         
-                ' To define the circle properties
-                Dim pen As New Pen(Color.Black, 3)
-                Dim radius As Integer = 50
-                Dim centerX As Integer = PictureBoxCircle.Width \ 2 ' X coordinate of the center
-                Dim centerY As Integer = PictureBoxCircle.Height \ 2 ' Y coordinate of the center
+                    ' To define the circle properties
+                    Using pen As New Pen(Color.Black, 3)
+                        Dim radius As Integer = 50
+                        Dim centerX As Integer = bitmap.Width \ 2 ' X coordinate of the center
+                        Dim centerY As Integer = bitmap.Height \ 2 ' Y coordinate of the center
         
-                ' to draw circle
-                g.DrawEllipse(pen, centerX - radius, centerY - radius, radius * 2, radius * 2) 'This method is used to draw an ellipse
-        
-                ' Releases the graphics
-                g.Dispose()
+                        ' to draw a circle
+                        g.DrawEllipse(pen, centerX - radius, centerY - radius, radius * 2, radius * 2)
+                    End Using
+                End Using
             End Sub
         
-            Private Sub Line_Click(sender As Object, e As EventArgs) Handles Line.Click
-                Dim g As Graphics = PictureBoxLine.CreateGraphics()
+            Private Sub DrawLine(bitmap As Bitmap)
         
-                Dim pen As New Pen(Color.Green, 3) ' to assign the color
+                Using g As Graphics = Graphics.FromImage(bitmap)
         
-                Dim startX As Integer = 0
-                Dim startY As Integer = PictureBoxLine.Height \ 2 ' X  and Y coordinates of start point
-                Dim endX As Integer = PictureBoxLine.Width
-                Dim endY As Integer = PictureBoxLine.Height \ 2   ' X  and Y coordinates of end point
+                    ' To define the line properties
+                    Using pen As New Pen(Color.Green, 3)
+                        Dim startX As Integer = 0
+                        Dim startY As Integer = bitmap.Height \ 2
+                        Dim endX As Integer = bitmap.Width
+                        Dim endY As Integer = bitmap.Height \ 2
         
-                g.DrawLine(pen, startX, startY, endX, endY) 'This method is used to draw a line
-                g.Dispose()
+                        ' to draw a line
+                        g.DrawLine(pen, startX, startY, endX, endY)
+                    End Using
+                End Using
             End Sub
         
-            Private Sub Point_Click(sender As Object, e As EventArgs) Handles Point.Click
-                Dim g As Graphics = PictureBoxPoint.CreateGraphics()
-                Dim pen As New Pen(Color.Blue, 3) ' to assign the color
+            Private Sub DrawPoint(bitmap As Bitmap)
+                Using g As Graphics = Graphics.FromImage(bitmap)
+                    ' To define the point properties
+                    Using pen As New Pen(Color.Blue, 3)
+                        Dim x As Integer = 50
+                        Dim y As Integer = 50
+                        Dim width As Integer = 1
+                        Dim height As Integer = 1
         
-                ' to define the coordinates of the point  
-                Dim x As Integer = 50
-                Dim y As Integer = 50
+                        ' to draw a point
+                        g.DrawRectangle(pen, x, y, width, height)
         
-                ' to define the rectangle size (1x1 pixels for a dot)
-                Dim width As Integer = 1
-                Dim height As Integer = 1
-        
-                ' to draw a point
-                g.DrawRectangle(pen, x, y, width, height)
-        
-        
-                g.Dispose()
+                    End Using
+                End Using
             End Sub
         
-            Private Sub Rectangle_Click(sender As Object, e As EventArgs) Handles Rectangle.Click
-                Dim g As Graphics = PictureBoxRectangle.CreateGraphics()
-                Dim pen As New Pen(Color.Red) ' to assign the color
+            Private Sub DrawRectangle(bitmap As Bitmap)
+                Using g As Graphics = Graphics.FromImage(bitmap)
+                    ' To define the rectangle properties
+                    Using pen As New Pen(Color.Red)
+                        Dim x As Integer = 0
+                        Dim y As Integer = 0
+                        Dim width As Integer = bitmap.Width - 1
+                        Dim height As Integer = bitmap.Height / 2
         
+                        ' to draw a rectangle
+                        g.DrawRectangle(pen, x, y, width, height)
+                    End Using
+                End Using
+            End Sub
         
-                ' to define the coordinates of the rectangle
-                Dim x As Integer = 0
-                Dim y As Integer = 0
+            Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         
-                ' to define the rectangle size 
-                Dim width As Integer = PictureBoxRectangle.Width - 1
-                Dim height As Integer = PictureBoxRectangle.Height / 2
+                ' to Create a Bitmap to draw on
+                Dim bitmap As New Bitmap(PictureBoxCircle.Width, PictureBoxCircle.Height)
         
-                ' to draw a point
-                g.DrawRectangle(pen, x, y, width, Height)
+                ' to Call the drawing functions for each shape
+                DrawCircle(bitmap)
+                PictureBoxCircle.Image = bitmap.Clone()
         
+                bitmap = New Bitmap(PictureBoxLine.Width, PictureBoxLine.Height)
+                DrawLine(bitmap)
+                PictureBoxLine.Image = bitmap.Clone()
         
-                g.Dispose()
+                bitmap = New Bitmap(PictureBoxPoint.Width, PictureBoxPoint.Height)
+                DrawPoint(bitmap)
+                PictureBoxPoint.Image = bitmap.Clone()
+        
+                bitmap = New Bitmap(PictureBoxRectangle.Width, PictureBoxRectangle.Height)
+                DrawRectangle(bitmap)
+                PictureBoxRectangle.Image = bitmap.Clone()
             End Sub
     End Class
