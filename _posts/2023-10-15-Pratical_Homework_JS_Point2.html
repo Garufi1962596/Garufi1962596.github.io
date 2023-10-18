@@ -61,6 +61,101 @@
             </tbody>
         </table>
 
+        <pre>
+            <code>
+                 &lt;script&gt;
+        
+                    function distribution(arr, k){
+                        
+                        const count={};
+        
+                        for (let i=0; i<k;i++){
+                            
+                            const lowerBound = i / k;
+                            const upperBound = (i + 1) / k;
+                            const interval= lowerBound.toString()+"-"+ upperBound.toString();
+                            count[interval] = 0;
+                            arr.forEach(element => {
+                                                      
+                                if(element>= lowerBound && element<upperBound){
+                                    count[interval]++;
+                                }
+                                                       
+                            });
+                        
+                        }
+                        return count;
+                    }
+        
+                    const K1=5;
+                    const K2=10;
+                    const N1=20;
+                    const N2= 50;
+                    const randomNumbers1 = Array.from({ length: N1 }, () => Math.random());
+                    const randomNumbers2 = Array.from({ length: N2 }, () => Math.random());
+        
+                    const countN1K1= distribution(randomNumbers1,K1);
+                    const countN1K2= distribution(randomNumbers1,K2);
+                    const countN2K1= distribution(randomNumbers2,K1);
+                    const countN2K2= distribution(randomNumbers2,K2);
+        
+                    const resultsTableN1K1 = document.getElementById('N1K1').getElementsByTagName('tbody')[0];
+                    const resultsTableN1K2 = document.getElementById('N1K2').getElementsByTagName('tbody')[0];
+                    const resultsTableN2K1 = document.getElementById('N2K1').getElementsByTagName('tbody')[0];
+                    const resultsTableN2K2 = document.getElementById('N2K2').getElementsByTagName('tbody')[0];
+        
+                    for (const interval in countN1K1) {
+                        const row = resultsTableN1K1.insertRow();
+                        const cell1 = row.insertCell(0);
+                        const cell2 = row.insertCell(1);
+                        const cell3 = row.insertCell(2);
+                        const cell4 = row.insertCell(3);
+                        cell1.innerHTML = interval;
+                        cell2.innerHTML = countN1K1[interval];
+                        cell3.innerHTML= (countN1K1[interval]/N1).toFixed(2);
+                        cell4.innerHTML= (countN1K1[interval]/N1 * 100).toFixed(2) + '%';;
+                    }
+        
+                    for (const interval in countN1K2) {
+                        const row = resultsTableN1K2.insertRow();
+                        const cell1 = row.insertCell(0);
+                        const cell2 = row.insertCell(1);
+                        const cell3 = row.insertCell(2);
+                        const cell4 = row.insertCell(3);
+                        cell1.innerHTML = interval;
+                        cell2.innerHTML = countN1K2[interval];
+                        cell3.innerHTML= (countN1K2[interval]/N1).toFixed(2);
+                        cell4.innerHTML= (countN1K2[interval]/N1 * 100).toFixed(2) + '%';;
+                    }
+                    
+                    for (const interval in countN2K1) {
+                        const row = resultsTableN2K1.insertRow();
+                        const cell1 = row.insertCell(0);
+                        const cell2 = row.insertCell(1);
+                        const cell3 = row.insertCell(2);
+                        const cell4 = row.insertCell(3);
+                        cell1.innerHTML = interval;
+                        cell2.innerHTML = countN2K1[interval];
+                        cell3.innerHTML= (countN2K1[interval]/N2).toFixed(2);
+                        cell4.innerHTML= (countN2K1[interval]/N2 * 100).toFixed(2) + '%';;
+                    }
+                    
+                    for (const interval in countN2K2) {
+                        const row = resultsTableN2K2.insertRow();
+                        const cell1 = row.insertCell(0);
+                        const cell2 = row.insertCell(1);
+                        const cell3 = row.insertCell(2);
+                        const cell4 = row.insertCell(3);
+                        cell1.innerHTML = interval;
+                        cell2.innerHTML = countN2K2[interval];
+                        cell3.innerHTML= (countN2K2[interval]/N2).toFixed(2);
+                        cell4.innerHTML= (countN2K2[interval]/N2 * 100).toFixed(2) + '%';;
+                    }
+                &lt;/script&gt;
+
+            </code>
+        </pre>
+        
         <script>
 
             function distribution(arr, k){
