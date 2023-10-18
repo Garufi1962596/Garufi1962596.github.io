@@ -1,5 +1,5 @@
 
-# Pratical Homework in VB
+# Pratical Homework1 in VB
 
 ## Write a program in C# or VB.NET that creates a window containing a single line, point, circle, rectangle.
 
