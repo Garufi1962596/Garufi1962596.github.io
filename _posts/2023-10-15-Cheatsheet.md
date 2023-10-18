@@ -295,7 +295,61 @@ In a standard Stack, you can't directly set elements. You can only push and pop 
 
 ## List
 
-In JavaScript, there is no built-in data structure called "List" as there is in some other programming languages like C#. Instead, you typically use arrays to achieve similar functionality. 
+In JavaScript, there is no built-in data structure called "List" as there is in some other programming languages like C#.
+
+          class MyList {
+            constructor() {
+              this.items = [];
+            }
+        
+          // Add an element to the list
+          add(item) {
+            this.items.push(item);
+          }
+        
+          // Remove an element from the list
+          remove(item) {
+            const index = this.items.indexOf(item);
+            if (index !== -1) {
+              this.items.splice(index, 1);
+            }
+          }
+        
+          // Get an element at a specific index
+          get(index) {
+            return this.items[index];
+          }
+        
+          // Set an element at a specific index
+          set(index, item) {
+            this.items[index] = item;
+          }
+        
+          // Check if an element exists in the list
+          exists(item) {
+            return this.items.includes(item);
+          }
+        
+          // Loop through the list with break/continue
+          loopWithBreakAndContinue() {
+            for (let i = 0; i < this.items.length; i++) {
+              const currentItem = this.items[i];
+        
+              // Use break to exit the loop
+              if (currentItem === "Item 2") {
+                break;
+              }
+        
+              // Use continue to skip the current iteration
+              if (currentItem === "Item 3") {
+                continue;
+              }
+        
+              console.log(currentItem);
+            }
+          }
+        }
+
 
 ## Dictionary
 
@@ -336,233 +390,378 @@ In JavaScript, there is no built-in data structure called "List" as there is in 
 
 JavaScript doesn't have a built-in data structure called "sorted list," but you can implement your own using arrays. 
 
-    // Using push (appends at the end)
-    sortedList.push(35);
+     class SortedList {
+         constructor() {
+             this.items = [];
+         }
     
-    // Using splice (inserts at the correct position)
-    const indexToInsert = sortedList.findIndex((el) => el > 25);
-    sortedList.splice(indexToInsert, 0, 25);
+      // Add an element to the sorted list while maintaining the sort order
+      add(item) {
+        this.items.push(item);
+        this.items.sort((a, b) => a - b); // Sort the items in ascending order
+      }
     
-    // Using the spread operator (adds and sorts the list)
-    sortedList = [...sortedList, 33].sort((a, b) => a - b);
-
-    const indexToRemove = sortedList.indexOf(40);
-    if (indexToRemove !== -1) {
-        sortedList.splice(indexToRemove, 1); // Removes the element at the index
+      // Remove an element from the sorted list
+      remove(item) {
+        const index = this.items.indexOf(item);
+        if (index !== -1) {
+          this.items.splice(index, 1);
+        }
+      }
+    
+      // Get an element at a specific index
+      get(index) {
+        return this.items[index];
+      }
+    
+      // Set an element at a specific index 
+      set(index, item) {
+        this.items[index] = item;
+      }
+    
+      // Check if an element exists in the sorted list
+      exists(item) {
+        return this.items.includes(item);
+      }
+    
+      // Loop through the sorted list with break/continue
+      loopWithBreakAndContinue() {
+        for (let i = 0; i < this.items.length; i++) {
+          const currentItem = this.items[i];
+    
+          // Use break to exit the loop
+          if (currentItem === 3) {
+            break;
+          }
+    
+          // Use continue to skip the current iteration
+          if (currentItem === 2) {
+            continue;
+          }
+    
+          console.log(currentItem);
+        }
+      }
     }
+    
+
 
 ## Hashset
 
 In JavaScript, there is no native "hashset" data structure, but you can implement similar functionality using objects or Sets
 
-    // Create a Hashset-Like Structure Using Objects
-    const hashset = {};
-
-    // Add values (keys) to the hashset
-    hashset['apple'] = true;
-    hashset['banana'] = true;
-
-    const hasApple = 'apple' in hashset; // Check for the Existence of Values
-
-    for (const key in hashset) { // loop
-        if (!hashset.hasOwnProperty(key)) continue; // Skip non-own properties
-        
-        if (key === 'banana') break; // Break the loop when 'banana' is found
-        // Access the value using hashset[key]
-    }
-
-    hashset['grape'] = true;    // add an element to the hashset
-
-    delete hashset['banana']; // to remove 
+    class HashSet {
+      constructor() {
+        this.set = new Set();
+      }
     
-    // or using a Set
-    const hashset = new Set();
-
-    // Add values to the hashset
-    hashset.add('apple');
-
-    const hasApple = hashset.has('apple'); // Check for the Existence of Values
-    const hasGrape = hashset.has('grape'); 
-
-       hashset.forEach((value) => {
-            if (value === 'banana') return; // Skip 'banana'
-            // Access the value
-       });
-
-    hashset.add('grape');  // add an element to the hashset
- 
-    hashset.delete('banana'); // to remove
+      // Add a value to the HashSet
+      add(value) {
+        this.set.add(value);
+      }
+    
+      // Remove a value from the HashSet
+      remove(value) {
+        this.set.delete(value);
+      }
+    
+      // Check if a value exists in the HashSet
+      exists(value) {
+        return this.set.has(value);
+      }
+    
+      // Loop through the HashSet with break/continue
+      loopWithBreakAndContinue() {
+        for (const value of this.set) {
+          // Use break to exit the loop
+          if (value === 3) {
+            break;
+          }
+    
+          // Use continue to skip the current iteration
+          if (value === 2) {
+            continue;
+          }
+    
+          console.log(value);
+        }
+      }
+    }
 
 ## SortedSet
 
 In JavaScript, there's no built-in "SortedSet" data structure. However, you can achieve similar functionality using Arrays and custom logic to maintain sorted order. 
 
-    const sortedSet = [];
-
-    // Add values in sorted order
-    sortedSet.push('apple');
-    sortedSet.sort(); // Keep the array sorted
-
-    for (let i = 0; i < sortedSet.length; i++) { //Loop
-        if (value === 'banana') break; // Break when 'banana' is found
-        if (value === 'grape') continue; // Skip 'grape'
-        console.log(sortedSet[i]);
-    }
-
-    for (const value of sortedSet) { // loop
-        console.log(value);
-    }
-
-    const index = sortedSet.indexOf('banana'); // remove
-    if (index !== -1) {
-        sortedSet.splice(index, 1);
-    }
-    
-    const hasApple = sortedSet.includes('apple'); // Check for the Existence of Values
+    class SortedSet {
+          constructor() {
+            this.items = [];
+          }
+        
+          // Add a value to the SortedSet while maintaining the sorted order
+          add(value) {
+            if (!this.exists(value)) {
+              this.items.push(value);
+              this.items.sort((a, b) => a - b); // Sort the items in ascending order
+            }
+          }
+        
+          // Remove a value from the SortedSet
+          remove(value) {
+            const index = this.items.indexOf(value);
+            if (index !== -1) {
+              this.items.splice(index, 1);
+            }
+          }
+        
+          // Check if a value exists in the SortedSet
+          exists(value) {
+            return this.items.includes(value);
+          }
+        
+          // Get all values in the SortedSet
+          getAll() {
+            return this.items.slice(); // Return a copy to prevent direct manipulation
+          }
+        
+          // Loop through the SortedSet with break/continue
+          loopWithBreakAndContinue() {
+            for (const value of this.items) {
+              // Use break to exit the loop
+              if (value === 3) {
+                break;
+              }
+        
+              // Use continue to skip the current iteration
+              if (value === 2) {
+                continue;
+              }
+        
+              console.log(value);
+            }
+          }
+        }
 
 ## Queue
 
 In JavaScript, you can simulate a queue (FIFO - First-In-First-Out) using arrays.
 
-    const queue = [];
-
-    const frontItem = queue[0]; // Retrieves 'item2'
-    
-    // Enqueue (add an item to the back of the queue)
-    queue.push('item1');
-    queue.push('item2');
-
-    const item = queue.shift(); // Removes and returns the first item (item1) //remove
-
-    const isEmpty = queue.length === 0; // Check if the queue is empty
-
-    for (const item of queue) {
-        if (item === 'item2') break; // Break when 'item2' is found
-        if (item === 'item1') continue; // Skip 'item1'
-        console.log(item);
-    }
-
+    class Queue {
+          constructor() {
+            this.items = [];
+          }
+        
+          // Add an item to the end of the queue
+          enqueue(item) {
+            this.items.push(item);
+          }
+        
+          // Remove and return the item from the front of the queue
+          dequeue() {
+            if (!this.isEmpty()) {
+              return this.items.shift();
+            }
+            return undefined; // Queue is empty
+          }
+        
+          // Get the item at the front of the queue without removing it
+          peek() {
+            if (!this.isEmpty()) {
+              return this.items[0];
+            }
+            return undefined; // Queue is empty
+          }
+        
+          // Check if the queue is empty
+          isEmpty() {
+            return this.items.length === 0;
+          }
+        
+          // Loop through the queue with break/continue
+          loopWithBreakAndContinue() {
+            for (let i = 0; i < this.items.length; i++) {
+              const currentItem = this.items[i];
+        
+              // Use break to exit the loop
+              if (currentItem === 3) {
+                break;
+              }
+        
+              // Use continue to skip the current iteration
+              if (currentItem === 2) {
+                continue;
+              }
+        
+              console.log(currentItem);
+            }
+          }
+        }
+        
 ## Stack 
 
 In JavaScript, you can simulate a stack (LIFO - Last-In-First-Out) using arrays.
 
-    const stack = [];
-
-    const topItem = stack[1]; // get
-
-    for (const item of stack) {
-        if (item === 'item2') break; // Break when 'item2' is found
-        if (item === 'item1') continue; // Skip 'item1'
-        console.log(item);
-    }
-
-    // Push (add an item to the top of the stack)
-    stack.push('item1');
-
-    const item = stack.pop(); // Removes and returns the last item 
-
-    const isEmpty = stack.length === 0; // Check if the stack is empty
-
-    const index = stack.indexOf(elementToFind); // check if there is the element
+    class Stack {
+          constructor() {
+            this.items = [];
+          }
+        
+          // Push an item into the stack
+          push(item) {
+            this.items.push(item);
+          }
+        
+          // Pop and return the item from the top of the stack
+          pop() {
+            if (!this.isEmpty()) {
+              return this.items.pop();
+            }
+            return undefined; // Stack is empty
+          }
+        
+          // Peek at the item on the top of the stack without removing it
+          peek() {
+            if (!this.isEmpty()) {
+              return this.items[this.items.length - 1];
+            }
+            return undefined; // Stack is empty
+          }
+        
+          // Check if the stack is empty
+          isEmpty() {
+            return this.items.length === 0;
+          }
+        
+          // Loop through the stack with break/continue
+          loopWithBreakAndContinue() {
+            for (let i = this.items.length - 1; i >= 0; i--) {
+              const currentItem = this.items[i];
+        
+              // Use break to exit the loop
+              if (currentItem === 3) {
+                break;
+              }
+        
+              // Use continue to skip the current iteration
+              if (currentItem === 2) {
+                continue;
+              }
+        
+              console.log(currentItem);
+            }
+          }
+        }
 
 ## LinkedList
 
-n JavaScript, there is no built-in linked list data structure like you might find in some other languages. However, you can simulate a singly linked list using objects or classes.
+In JavaScript, there is no built-in linked list data structure like you might find in some other languages. However, you can simulate a singly linked list using objects or classes.
 
-    class ListNode {
-        constructor(value) {
-            this.value = value;
-            this.next = null;
-        }
+      class Node {
+      constructor(value) {
+        this.value = value;
+        this.next = null;
+      }
     }
     
-    const linkedList = new ListNode('item1');
-    linkedList.next = new ListNode('item2');
-    linkedList.next.next = new ListNode('item3');
-
-    const item2 = linkedList.next; // get the second item
-
-    linkedList.value = 'newItem1'; // Updates the value of the first item
-
-    let current = linkedList; // You can use regular loops or recursion with break and continue statements similarly to array
-    while (current) {
-        console.log(current.value);
-        current = current.next;
-    }
-
-    current.next = new ListNode('newItem'); // to add an element 
-     
-    let current = linkedList; // remove
-    let previous = null;
-    const targetValue = 'item2';
-    while (current) {
-        if (current.value === targetValue) {
-            if (previous) {
-                previous.next = current.next;
-            }
-            // Handle head node removal separately if needed
-            break;
+    class LinkedList {
+      constructor() {
+        this.head = null;
+        this.length = 0;
+      }
+    
+      // Add a value to the end of the linked list
+      add(value) {
+        const newNode = new Node(value);
+        if (!this.head) {
+          this.head = newNode;
+        } else {
+          let current = this.head;
+          while (current.next) {
+            current = current.next;
+          }
+          current.next = newNode;
         }
-        previous = current;
-        current = current.next;
-    }
-
-    function contains(list, targetValue) { //Check the Existence of Key/Value
-        let current = list;
-        while (current) {
-            if (current.value === targetValue) {
-                return true;
+        this.length++;
+      }
+    
+      // Remove a value from the linked list
+      remove(value) {
+        if (!this.head) {
+          return;
+        }
+    
+        if (this.head.value === value) {
+          this.head = this.head.next;
+          this.length--;
+        } else {
+          let current = this.head;
+          while (current.next) {
+            if (current.next.value === value) {
+              current.next = current.next.next;
+              this.length--;
+              return;
             }
             current = current.next;
+          }
+        }
+      }
+    
+      // Get a value at a specific index
+      get(index) {
+        if (index < 0 || index >= this.length) {
+          return undefined;
+        }
+    
+        let current = this.head;
+        for (let i = 0; i < index; i++) {
+          current = current.next;
+        }
+        return current.value;
+      }
+    
+      // Set a value at a specific index
+      set(index, value) {
+        if (index < 0 || index >= this.length) {
+          return;
+        }
+    
+        let current = this.head;
+        for (let i = 0; i < index; i++) {
+          current = current.next;
+        }
+        current.value = value;
+      }
+    
+      // Check if a value exists in the linked list
+      exists(value) {
+        let current = this.head;
+        while (current) {
+          if (current.value === value) {
+            return true;
+          }
+          current = current.next;
         }
         return false;
+      }
+    
+      // Loop through the linked list with break/continue
+      loopWithBreakAndContinue() {
+        let current = this.head;
+        while (current) {
+          const value = current.value;
+    
+          // Use break to exit the loop
+          if (value === 3) {
+            break;
+          }
+    
+          // Use continue to skip the current iteration
+          if (value === 2) {
+            current = current.next;
+            continue;
+          }
+    
+          console.log(value);
+          current = current.next;
+        }
+      }
     }
-
-    const hasItem2 = contains(linkedList, 'item2');
-
-    
-    
-
-    
-    
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-     
-     
-
-
-
-
-
-
-
-
-
-
-
-
-    
