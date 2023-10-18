@@ -179,7 +179,7 @@ In a HashSet<T>, you cannot directly "get" or "set" elements in the same way you
 
   You can get elements from a SortedSet, but it's read-only. There's no direct way to set elements because a SortedSet is intended to maintain its sorted order.
 
-  ## Queue
+## Queue
 
     string frontItem = queue.Peek(); // to get an element from the queue
     
@@ -205,7 +205,7 @@ In a HashSet<T>, you cannot directly "get" or "set" elements in the same way you
 
  In a standard Queue, you can't directly set elements. It follows the FIFO principle, and you can only enqueue and dequeue elements.
 
- ## Stack
+## Stack
 
     string topItem = stack.Peek(); // Inspect the top element, to get an element from the stack without removing it
     
