@@ -85,293 +85,294 @@
         </tr>
     </table>
     <br>
-    below is the code used to create distributions and populate the tables 
+    Below is the code used to create distributions and populate the tables. Since not all pitch values were included in the questionnaire, I added some values to make the distribution interesting 
+    <br>
     <pre>
         <code>
-             <script>
-
-         function freqDistr(arr) {
-            const count = {};
-            arr.forEach(item => {
-                if (typeof item.valore === 'string' || Number.isInteger(item.valore)){
-                    const valore = item.valore
-                    if (count[valore] === undefined) {
-                        count[valore] = 1;
-                    } else {
-                        count[valore]++;
+             &lt;script&gt;
+        
+                 function freqDistr(arr) {
+                    const count = {};
+                    arr.forEach(item => {
+                        if (typeof item.valore === 'string' || Number.isInteger(item.valore)){
+                            const valore = item.valore
+                            if (count[valore] === undefined) {
+                                count[valore] = 1;
+                            } else {
+                                count[valore]++;
+                            }
+                        }                
+                        else {    
+                            const interval=parseFloat(item.valore).toFixed(1);
+                            const valore = interval.toString() + "-" + ((parseFloat(interval) + 0.1).toFixed(1)).toString() ;
+                            if (count[valore] === undefined) {
+                                count[valore] = 1;
+                            } else {
+                                count[valore]++;
+                            }
+                        }
+                        
+                    });
+                    
+                    return count;
+                }
+        
+                function freqDistrJoin(arr1, arr2) {
+                    const combinedCounts = {};
+                    for (let i = 0; i < arr1.length; i++) {
+                        const AgeValue = arr1[i].valore.toString(); 
+                        const sportValue = arr2[i].valore;  
+        
+                        const combinedKey = AgeValue +"-"+ sportValue;
+                        
+                        if (combinedCounts[combinedKey] === undefined) {
+                            combinedCounts[combinedKey] = 1;
+                        } else {
+                            combinedCounts[combinedKey]++;
+                        }
                     }
-                }                
-                else {    
-                    const interval=parseFloat(item.valore).toFixed(1);
-                    const valore = interval.toString() + "-" + ((parseFloat(interval) + 0.1).toFixed(1)).toString() ;
-                    if (count[valore] === undefined) {
-                        count[valore] = 1;
-                    } else {
-                        count[valore]++;
-                    }
+        
+                    return combinedCounts;
                 }
                 
-            });
-            
-            return count;
-        }
-
-        function freqDistrJoin(arr1, arr2) {
-            const combinedCounts = {};
-            for (let i = 0; i < arr1.length; i++) {
-                const AgeValue = arr1[i].valore.toString(); 
-                const sportValue = arr2[i].valore;  
-
-                const combinedKey = AgeValue +"-"+ sportValue;
                 
-                if (combinedCounts[combinedKey] === undefined) {
-                    combinedCounts[combinedKey] = 1;
-                } else {
-                    combinedCounts[combinedKey]++;
+               const Age = [
+                    { chiave: 1, valore: 22 },
+                    { chiave: 2, valore: 22 },
+                    { chiave: 3, valore: 22 },
+                    { chiave: 4, valore: 23 },
+                    { chiave: 5, valore: 23 },
+                    { chiave: 6, valore: 21 },
+                    { chiave: 7, valore: 23 },
+                    { chiave: 8, valore: 23 },
+                    { chiave: 9, valore: 24 },
+                    { chiave: 10, valore: 24 },
+                    { chiave: 11, valore: 23 },
+                    { chiave: 12, valore: 21 },
+                    { chiave: 13, valore: 25 },
+                    { chiave: 14, valore: 22 },
+                    { chiave: 15, valore: 22 },
+                    { chiave: 16, valore: 22 },
+                    { chiave: 17, valore: 25 },
+                    { chiave: 18, valore: 21 },
+                    { chiave: 19, valore: 21 },
+                    { chiave: 20, valore: 21 },
+                    { chiave: 21, valore: 23 },
+                    { chiave: 22, valore: 22 },
+                    { chiave: 23, valore: 21 },
+                    { chiave: 24, valore: 23 },
+                    { chiave: 25, valore: 24 },
+                    { chiave: 26, valore: 25 },
+                    { chiave: 27, valore: 23 },
+                    { chiave: 28, valore: 22 },
+                    { chiave: 29, valore: 22 },
+                    { chiave: 30, valore: 27 },
+                    { chiave: 31, valore: 23 },
+                    { chiave: 32, valore: 24 },
+                    { chiave: 33, valore: 22 },
+                    { chiave: 34, valore: 25 },
+                    { chiave: 35, valore: 39 },
+                    { chiave: 36, valore: 26 },
+                    { chiave: 37, valore: 23 },
+                    { chiave: 38, valore: 22 },
+                    { chiave: 39, valore: 22 },
+                    { chiave: 40, valore: 22 },
+                    { chiave: 41, valore: 23 },    
+                    { chiave: 42, valore: 27 },
+                    { chiave: 43, valore: 23 },
+                    { chiave: 44, valore: 25 },
+                    { chiave: 45, valore: 22 },
+                    { chiave: 46, valore: 22 },
+                    { chiave: 47, valore: 22 },
+                    { chiave: 48, valore: 22 },
+                    { chiave: 49, valore: 21 },
+                    { chiave: 50, valore: 23 },
+                    { chiave: 51, valore: 23 },
+                    { chiave: 52, valore: 26 },
+                    { chiave: 53, valore: 27 },
+                    { chiave: 54, valore: 23 },
+                    { chiave: 55, valore: 23 },
+                    { chiave: 56, valore: 23 }
+                ];
+        
+                const Height = [
+                    { chiave: 1, valore: 1.60 },
+                    { chiave: 2, valore: 1.75 },
+                    { chiave: 3, valore: 1.68 },
+                    { chiave: 4, valore: 1.72 },
+                    { chiave: 5, valore: 1.58 },
+                    { chiave: 6, valore: 1.76 },
+                    { chiave: 7, valore: 1.76 },
+                    { chiave: 8, valore: 1.70 },
+                    { chiave: 9, valore: 1.73 },
+                    { chiave: 10, valore: 1.8 },
+                    { chiave: 11, valore: 1.80 },
+                    { chiave: 12, valore: 1.72 },
+                    { chiave: 13, valore: 1.68 },
+                    { chiave: 14, valore: 1.68 },
+                    { chiave: 15, valore: 1.81 },
+                    { chiave: 16, valore: 1.65 },
+                    { chiave: 17, valore: 1.76 },
+                    { chiave: 18, valore: 1.86 },
+                    { chiave: 19, valore: 1.71 },
+                    { chiave: 20, valore: 1.62 },
+                    { chiave: 21, valore: 1.75 },
+                    { chiave: 22, valore: 1.70 },
+                    { chiave: 23, valore: 1.63 },
+                    { chiave: 24, valore: 1.74 },
+                    { chiave: 25, valore: 1.66 },
+                    { chiave: 26, valore: 1.79 },
+                    { chiave: 27, valore: 1.61 },
+                    { chiave: 28, valore: 1.68 },
+                    { chiave: 29, valore: 1.80 },
+                    { chiave: 30, valore: 1.65 },
+                    { chiave: 31, valore: 1.80 },
+                    { chiave: 32, valore: 1.64 },
+                    { chiave: 33, valore: 1.71 },
+                    { chiave: 34, valore: 1.59 },
+                    { chiave: 35, valore: 1.73 },
+                    { chiave: 36, valore: 1.60 },
+                    { chiave: 37, valore: 1.78 },
+                    { chiave: 38, valore: 1.67 },
+                    { chiave: 39, valore: 1.74 },
+                    { chiave: 40, valore: 1.66 },
+                    { chiave: 41, valore: 1.76 },
+                    { chiave: 42, valore: 1.61 },
+                    { chiave: 43, valore: 1.69 },
+                    { chiave: 44, valore: 1.79 },
+                    { chiave: 45, valore: 1.57 },
+                    { chiave: 46, valore: 1.90 },
+                    { chiave: 47, valore: 1.64 },
+                    { chiave: 48, valore: 1.70 },
+                    { chiave: 49, valore: 1.59 },
+                    { chiave: 50, valore: 1.73 },
+                    { chiave: 51, valore: 1.62 },
+                    { chiave: 52, valore: 1.75 },
+                    { chiave: 53, valore: 1.70 },
+                    { chiave: 54, valore: 1.78 },
+                    { chiave: 55, valore: 1.91 },
+                    { chiave: 56, valore: 1.82 }
+                ];
+        
+        
+                const Sport = [
+                    { chiave: 1, valore: 'NoSport' },
+                    { chiave: 2, valore: 'Rugby' },
+                    { chiave: 3, valore: 'Krav Maga' },
+                    { chiave: 4, valore: 'Badminton' },
+                    { chiave: 5, valore: 'Rugby' },
+                    { chiave: 6, valore: 'Football' },
+                    { chiave: 7, valore: 'skiing' },
+                    { chiave: 8, valore: 'NoSport' },
+                    { chiave: 9, valore: 'NoSport' },
+                    { chiave: 10, valore: 'Football' },
+                    { chiave: 11, valore: 'NoSport' },
+                    { chiave: 12, valore: 'Football' },
+                    { chiave: 13, valore: 'Longboard' },
+                    { chiave: 14, valore: 'Football' },
+                    { chiave: 15, valore: 'Swimming' },
+                    { chiave: 16, valore: 'Swimming' },
+                    { chiave: 17, valore: 'Tennis' },
+                    { chiave: 18, valore: 'Tennis' },
+                    { chiave: 19, valore: 'Tennis' },
+                    { chiave: 20, valore: 'Gym' },
+                    { chiave: 21, valore: 'NoSport' },
+                    { chiave: 22, valore: 'Swimming' },
+                    { chiave: 23, valore: 'Gym' },
+                    { chiave: 24, valore: 'Martial arts' },
+                    { chiave: 25, valore: 'Gym' },
+                    { chiave: 26, valore: 'Gym' },
+                    { chiave: 27, valore: 'Gym' },
+                    { chiave: 28, valore: 'Gym' },
+                    { chiave: 29, valore: 'Gym' },
+                    { chiave: 30, valore: 'Football' },
+                    { chiave: 31, valore: 'Gym' },
+                    { chiave: 32, valore: 'Gym' },
+                    { chiave: 33, valore: 'Yoga' },
+                    { chiave: 34, valore: 'Figure skating' },
+                    { chiave: 35, valore: 'Climbing' },
+                    { chiave: 36, valore: 'Gym' },
+                    { chiave: 37, valore: 'Volleyball' },
+                    { chiave: 38, valore: 'NoSport' },
+                    { chiave: 39, valore: 'Gym' },
+                    { chiave: 40, valore: 'NoSport' },
+                    { chiave: 41, valore: 'NoSport' },
+                    { chiave: 42, valore: 'NoSport' },
+                    { chiave: 43, valore: 'Gym' },
+                    { chiave: 44, valore: 'Gym' },
+                    { chiave: 45, valore: 'Football' },
+                    { chiave: 46, valore: 'Football' },
+                    { chiave: 47, valore: 'NoSport' },
+                    { chiave: 48, valore: 'Gym' },
+                    { chiave: 49, valore: 'Gym' },
+                    { chiave: 50, valore: 'Gym' },
+                    { chiave: 51, valore: 'NoSport' },
+                    { chiave: 52, valore: 'Gym' },
+                    { chiave: 53, valore: 'Gym' },
+                    { chiave: 54, valore: 'NoSport' },
+                    { chiave: 55, valore: 'Gym' },
+                    { chiave: 56, valore: 'Gym' }
+                ];
+        
+        
+                const countAge = freqDistr(Age);
+                const countHeight = freqDistr(Height);
+                const countSport = freqDistr(Sport);
+                const countJoin = freqDistrJoin(Age, Sport);
+        
+                const resultsTableAge = document.getElementById('Age').getElementsByTagName('tbody')[0];
+                const resultsTableHeight = document.getElementById('Height').getElementsByTagName('tbody')[0];
+                const resultsTableSport = document.getElementById('Sport').getElementsByTagName('tbody')[0];
+                const resultsTableJoin = document.getElementById('Join').getElementsByTagName('tbody')[0];
+        
+                for (const valore in countAge) {
+                    const row = resultsTableAge.insertRow();
+                    const cell1 = row.insertCell(0);
+                    const cell2 = row.insertCell(1);
+                    const cell3 = row.insertCell(2);
+                    const cell4 = row.insertCell(3);
+                    cell1.innerHTML = valore;
+                    cell2.innerHTML = countAge[valore];
+                    cell3.innerHTML= (countAge[valore]/Age.length).toFixed(2);
+                    cell4.innerHTML= (countAge[valore]/Age.length * 100).toFixed(2) + '%';;
                 }
-            }
-
-            return combinedCounts;
-        }
+                
+                for (const valore in countHeight) {
+                    const row = resultsTableHeight.insertRow();
+                    const cell1 = row.insertCell(0);
+                    const cell2 = row.insertCell(1);
+                    const cell3 = row.insertCell(2);
+                    const cell4 = row.insertCell(3);
+                    cell1.innerHTML = valore;
+                    cell2.innerHTML = countHeight[valore];
+                    cell3.innerHTML= (countHeight[valore]/Height.length).toFixed(2);
+                    cell4.innerHTML= (countHeight[valore]/Height.length * 100).toFixed(2) + '%';;
+                }
         
+                for (const valore in countSport) {
+                    const row = resultsTableSport.insertRow();
+                    const cell1 = row.insertCell(0);
+                    const cell2 = row.insertCell(1);
+                    const cell3 = row.insertCell(2);
+                    const cell4 = row.insertCell(3);
+                    cell1.innerHTML = valore;
+                    cell2.innerHTML = countSport[valore];
+                    cell3.innerHTML= (countSport[valore]/Sport.length).toFixed(2);
+                    cell4.innerHTML= (countSport[valore]/Sport.length * 100).toFixed(2) + '%';;
+                }
         
-       const Age = [
-            { chiave: 1, valore: 22 },
-            { chiave: 2, valore: 22 },
-            { chiave: 3, valore: 22 },
-            { chiave: 4, valore: 23 },
-            { chiave: 5, valore: 23 },
-            { chiave: 6, valore: 21 },
-            { chiave: 7, valore: 23 },
-            { chiave: 8, valore: 23 },
-            { chiave: 9, valore: 24 },
-            { chiave: 10, valore: 24 },
-            { chiave: 11, valore: 23 },
-            { chiave: 12, valore: 21 },
-            { chiave: 13, valore: 25 },
-            { chiave: 14, valore: 22 },
-            { chiave: 15, valore: 22 },
-            { chiave: 16, valore: 22 },
-            { chiave: 17, valore: 25 },
-            { chiave: 18, valore: 21 },
-            { chiave: 19, valore: 21 },
-            { chiave: 20, valore: 21 },
-            { chiave: 21, valore: 23 },
-            { chiave: 22, valore: 22 },
-            { chiave: 23, valore: 21 },
-            { chiave: 24, valore: 23 },
-            { chiave: 25, valore: 24 },
-            { chiave: 26, valore: 25 },
-            { chiave: 27, valore: 23 },
-            { chiave: 28, valore: 22 },
-            { chiave: 29, valore: 22 },
-            { chiave: 30, valore: 27 },
-            { chiave: 31, valore: 23 },
-            { chiave: 32, valore: 24 },
-            { chiave: 33, valore: 22 },
-            { chiave: 34, valore: 25 },
-            { chiave: 35, valore: 39 },
-            { chiave: 36, valore: 26 },
-            { chiave: 37, valore: 23 },
-            { chiave: 38, valore: 22 },
-            { chiave: 39, valore: 22 },
-            { chiave: 40, valore: 22 },
-            { chiave: 41, valore: 23 },    
-            { chiave: 42, valore: 27 },
-            { chiave: 43, valore: 23 },
-            { chiave: 44, valore: 25 },
-            { chiave: 45, valore: 22 },
-            { chiave: 46, valore: 22 },
-            { chiave: 47, valore: 22 },
-            { chiave: 48, valore: 22 },
-            { chiave: 49, valore: 21 },
-            { chiave: 50, valore: 23 },
-            { chiave: 51, valore: 23 },
-            { chiave: 52, valore: 26 },
-            { chiave: 53, valore: 27 },
-            { chiave: 54, valore: 23 },
-            { chiave: 55, valore: 23 },
-            { chiave: 56, valore: 23 }
-        ];
-
-        const Height = [
-            { chiave: 1, valore: 1.60 },
-            { chiave: 2, valore: 1.75 },
-            { chiave: 3, valore: 1.68 },
-            { chiave: 4, valore: 1.72 },
-            { chiave: 5, valore: 1.58 },
-            { chiave: 6, valore: 1.76 },
-            { chiave: 7, valore: 1.76 },
-            { chiave: 8, valore: 1.70 },
-            { chiave: 9, valore: 1.73 },
-            { chiave: 10, valore: 1.8 },
-            { chiave: 11, valore: 1.80 },
-            { chiave: 12, valore: 1.72 },
-            { chiave: 13, valore: 1.68 },
-            { chiave: 14, valore: 1.68 },
-            { chiave: 15, valore: 1.81 },
-            { chiave: 16, valore: 1.65 },
-            { chiave: 17, valore: 1.76 },
-            { chiave: 18, valore: 1.86 },
-            { chiave: 19, valore: 1.71 },
-            { chiave: 20, valore: 1.62 },
-            { chiave: 21, valore: 1.75 },
-            { chiave: 22, valore: 1.70 },
-            { chiave: 23, valore: 1.63 },
-            { chiave: 24, valore: 1.74 },
-            { chiave: 25, valore: 1.66 },
-            { chiave: 26, valore: 1.79 },
-            { chiave: 27, valore: 1.61 },
-            { chiave: 28, valore: 1.68 },
-            { chiave: 29, valore: 1.80 },
-            { chiave: 30, valore: 1.65 },
-            { chiave: 31, valore: 1.80 },
-            { chiave: 32, valore: 1.64 },
-            { chiave: 33, valore: 1.71 },
-            { chiave: 34, valore: 1.59 },
-            { chiave: 35, valore: 1.73 },
-            { chiave: 36, valore: 1.60 },
-            { chiave: 37, valore: 1.78 },
-            { chiave: 38, valore: 1.67 },
-            { chiave: 39, valore: 1.74 },
-            { chiave: 40, valore: 1.66 },
-            { chiave: 41, valore: 1.76 },
-            { chiave: 42, valore: 1.61 },
-            { chiave: 43, valore: 1.69 },
-            { chiave: 44, valore: 1.79 },
-            { chiave: 45, valore: 1.57 },
-            { chiave: 46, valore: 1.90 },
-            { chiave: 47, valore: 1.64 },
-            { chiave: 48, valore: 1.70 },
-            { chiave: 49, valore: 1.59 },
-            { chiave: 50, valore: 1.73 },
-            { chiave: 51, valore: 1.62 },
-            { chiave: 52, valore: 1.75 },
-            { chiave: 53, valore: 1.70 },
-            { chiave: 54, valore: 1.78 },
-            { chiave: 55, valore: 1.91 },
-            { chiave: 56, valore: 1.82 }
-        ];
-
-
-        const Sport = [
-            { chiave: 1, valore: 'NoSport' },
-            { chiave: 2, valore: 'Rugby' },
-            { chiave: 3, valore: 'Krav Maga' },
-            { chiave: 4, valore: 'Badminton' },
-            { chiave: 5, valore: 'Rugby' },
-            { chiave: 6, valore: 'Football' },
-            { chiave: 7, valore: 'skiing' },
-            { chiave: 8, valore: 'NoSport' },
-            { chiave: 9, valore: 'NoSport' },
-            { chiave: 10, valore: 'Football' },
-            { chiave: 11, valore: 'NoSport' },
-            { chiave: 12, valore: 'Football' },
-            { chiave: 13, valore: 'Longboard' },
-            { chiave: 14, valore: 'Football' },
-            { chiave: 15, valore: 'Swimming' },
-            { chiave: 16, valore: 'Swimming' },
-            { chiave: 17, valore: 'Tennis' },
-            { chiave: 18, valore: 'Tennis' },
-            { chiave: 19, valore: 'Tennis' },
-            { chiave: 20, valore: 'Gym' },
-            { chiave: 21, valore: 'NoSport' },
-            { chiave: 22, valore: 'Swimming' },
-            { chiave: 23, valore: 'Gym' },
-            { chiave: 24, valore: 'Martial arts' },
-            { chiave: 25, valore: 'Gym' },
-            { chiave: 26, valore: 'Gym' },
-            { chiave: 27, valore: 'Gym' },
-            { chiave: 28, valore: 'Gym' },
-            { chiave: 29, valore: 'Gym' },
-            { chiave: 30, valore: 'Football' },
-            { chiave: 31, valore: 'Gym' },
-            { chiave: 32, valore: 'Gym' },
-            { chiave: 33, valore: 'Yoga' },
-            { chiave: 34, valore: 'Figure skating' },
-            { chiave: 35, valore: 'Climbing' },
-            { chiave: 36, valore: 'Gym' },
-            { chiave: 37, valore: 'Volleyball' },
-            { chiave: 38, valore: 'NoSport' },
-            { chiave: 39, valore: 'Gym' },
-            { chiave: 40, valore: 'NoSport' },
-            { chiave: 41, valore: 'NoSport' },
-            { chiave: 42, valore: 'NoSport' },
-            { chiave: 43, valore: 'Gym' },
-            { chiave: 44, valore: 'Gym' },
-            { chiave: 45, valore: 'Football' },
-            { chiave: 46, valore: 'Football' },
-            { chiave: 47, valore: 'NoSport' },
-            { chiave: 48, valore: 'Gym' },
-            { chiave: 49, valore: 'Gym' },
-            { chiave: 50, valore: 'Gym' },
-            { chiave: 51, valore: 'NoSport' },
-            { chiave: 52, valore: 'Gym' },
-            { chiave: 53, valore: 'Gym' },
-            { chiave: 54, valore: 'NoSport' },
-            { chiave: 55, valore: 'Gym' },
-            { chiave: 56, valore: 'Gym' }
-        ];
-
-
-        const countAge = freqDistr(Age);
-        const countHeight = freqDistr(Height);
-        const countSport = freqDistr(Sport);
-        const countJoin = freqDistrJoin(Age, Sport);
-
-        const resultsTableAge = document.getElementById('Age').getElementsByTagName('tbody')[0];
-        const resultsTableHeight = document.getElementById('Height').getElementsByTagName('tbody')[0];
-        const resultsTableSport = document.getElementById('Sport').getElementsByTagName('tbody')[0];
-        const resultsTableJoin = document.getElementById('Join').getElementsByTagName('tbody')[0];
-
-        for (const valore in countAge) {
-            const row = resultsTableAge.insertRow();
-            const cell1 = row.insertCell(0);
-            const cell2 = row.insertCell(1);
-            const cell3 = row.insertCell(2);
-            const cell4 = row.insertCell(3);
-            cell1.innerHTML = valore;
-            cell2.innerHTML = countAge[valore];
-            cell3.innerHTML= (countAge[valore]/Age.length).toFixed(2);
-            cell4.innerHTML= (countAge[valore]/Age.length * 100).toFixed(2) + '%';;
-        }
-        
-        for (const valore in countHeight) {
-            const row = resultsTableHeight.insertRow();
-            const cell1 = row.insertCell(0);
-            const cell2 = row.insertCell(1);
-            const cell3 = row.insertCell(2);
-            const cell4 = row.insertCell(3);
-            cell1.innerHTML = valore;
-            cell2.innerHTML = countHeight[valore];
-            cell3.innerHTML= (countHeight[valore]/Height.length).toFixed(2);
-            cell4.innerHTML= (countHeight[valore]/Height.length * 100).toFixed(2) + '%';;
-        }
-
-        for (const valore in countSport) {
-            const row = resultsTableSport.insertRow();
-            const cell1 = row.insertCell(0);
-            const cell2 = row.insertCell(1);
-            const cell3 = row.insertCell(2);
-            const cell4 = row.insertCell(3);
-            cell1.innerHTML = valore;
-            cell2.innerHTML = countSport[valore];
-            cell3.innerHTML= (countSport[valore]/Sport.length).toFixed(2);
-            cell4.innerHTML= (countSport[valore]/Sport.length * 100).toFixed(2) + '%';;
-        }
-
-          for (const valore in countJoin) {
-            const row = resultsTableJoin.insertRow();
-            const cell1 = row.insertCell(0);
-            const cell2 = row.insertCell(1);
-            const cell3 = row.insertCell(2);
-            const cell4 = row.insertCell(3);
-            cell1.innerHTML = valore;
-            cell2.innerHTML = countJoin[valore];
-            cell3.innerHTML= (countJoin[valore]/Height.length).toFixed(2);
-            cell4.innerHTML= (countJoin[valore]/Height.length * 100).toFixed(2) + '%';;
-        }
-    </script
+                  for (const valore in countJoin) {
+                    const row = resultsTableJoin.insertRow();
+                    const cell1 = row.insertCell(0);
+                    const cell2 = row.insertCell(1);
+                    const cell3 = row.insertCell(2);
+                    const cell4 = row.insertCell(3);
+                    cell1.innerHTML = valore;
+                    cell2.innerHTML = countJoin[valore];
+                    cell3.innerHTML= (countJoin[valore]/Height.length).toFixed(2);
+                    cell4.innerHTML= (countJoin[valore]/Height.length * 100).toFixed(2) + '%';;
+                }
+            &lt;/script&gt;
         </code>
     </pre>
 
