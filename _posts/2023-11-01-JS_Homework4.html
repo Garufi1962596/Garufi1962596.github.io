@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body >  
+    <div style="text-align: center; padding-top: 10%;">
+        <label for="numeroVariabili">variables number:</label>
+        <input type="number" id="numeroVariabili" min="1" value="1" >
+        <button onclick="creaInput()">create variables</button>
+        
+        <div id="specify" style="margin-top: 3%;"> </div>
+        
+        <br>
+        <div id="inputContainer"></div>
+        <div id="button" style="margin-top: 3%;"> </div>
+    </div>  
+    <div style="text-align: center;">
+        <h1>frequency distribution </h1>
+            <table align="center" border="1" id="res">
+                <thead>
+                    <tr>
+                        <th>Interval</th>
+                        <th>absolute</th>
+                        <th>relative</th>
+                        <th>percentage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+    </div>        
+    <div style="text-align: center;">
+        <h1>frequency distribution of Sport</h1>
+        <table align="center" border="1" id="Sport">
+            <thead>
+                <tr>
+                    <th>Value</th>
+                    <th>absolute</th>
+                    <th>relative</th>
+                    <th>percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+            
+        </table>
+    </div>
+    <script>
+        function creaInput() {
+            var numeroVariabili = parseInt(document.getElementById("numeroVariabili").value);
+
+            var inputContainer = document.getElementById("inputContainer");
+            var spec=document.getElementById("specify");
+            spec.innerHTML="Inserisci gli intervalli che desideri";
+            
+            inputContainer.innerHTML = "";
+            var buttonContainer=document.getElementById("button");
+            buttonContainer.innerHTML="";
+
+            for (var i = 1; i <= numeroVariabili; i++) {
+                var input = document.createElement("input");
+                input.type = "number";
+                input.min="1";
+                input.value="1";
+                input.id = "variabile" + i;
+                input.placeholder = "Variabile " + i;
+                var label = document.createElement("label");
+                label.innerText="var" + i;
+                label.for="variabile" + i;
+                label.style="margin-right: 1%; margin-left:2%";
+                inputContainer.appendChild(label);
+                inputContainer.appendChild(input);
+            }
+            var button= document.createElement("button");
+            button.onclick= distribution;
+            button.textContent= "Create join distribution";
+            buttonContainer.append(button);
+
+        }
+        
+        function Organize(arr, interval){
+            var result=[];
+            for(let i=0; i< arr.length; i++){
+                
+                var aux=arr[i];
+                var aux1=[];
+                var k= interval[i];
+                for(let j=0;j<k; j++){
+                    
+                    var inizio= (j/k).toFixed(2);
+                    var fine= ((j+1)/k).toFixed(2);
+                    
+                    for(s=0;s<aux.length;s++){    
+                        if(aux[s]>=inizio && aux[s]<fine){
+                            
+                            aux1[s]=inizio.toString() +"-"+ fine.toString();
+                        }    
+                    }
+                }
+                              
+                result.push(aux1);
+            }
+            return result;
+        }
+
+        function combinazionation(arrayDiArray, indiceArray = 0, combinazioneAttuale = []) {
+            if (indiceArray === arrayDiArray.length) {
+                return [combinazioneAttuale.join(" ")];
+            }
+
+            const combinazioni = [];
+
+            for (let i = 0; i < arrayDiArray[indiceArray].length; i++) {
+                combinazioneAttuale[indiceArray] = arrayDiArray[indiceArray][i];
+                const combinazioniRicorsive = combinazionation(arrayDiArray, indiceArray + 1, combinazioneAttuale);
+                combinazioni.push(...combinazioniRicorsive);
+            }
+
+            return combinazioni;
+        }
+        function freqDistr(arr) {
+            const count = {};
+            arr.forEach(item => {
+                if (typeof item.valore === 'string' || Number.isInteger(item.valore)){
+                    const valore = item.valore
+                    if (count[valore] === undefined) {
+                        count[valore] = 1;
+                    } else {
+                        count[valore]++;
+                    }
+                }                
+                else {    
+                    const interval=parseFloat(item.valore).toFixed(1);
+                    const valore = interval.toString() + "-" + ((parseFloat(interval) + 0.1).toFixed(1)).toString() ;
+                    if (count[valore] === undefined) {
+                        count[valore] = 1;
+                    } else {
+                        count[valore]++;
+                    }
+                }
+                
+            });
+            
+            return count;
+        }
+        function freqDistrJoin(arr1, interval){
+            
+            var ArNew= Organize(arr1, interval);
+            var countjoin={};
+            var k;
+            for(let j=0;j<10;j++){
+                
+                for(let i=0; i<arr1.length;i++){
+                    if(i==0) k=ArNew[i][j];
+                    else{
+                        var v= ArNew[i][j];
+                        k= k+" "+ v;
+                    }    
+                    if(i+1==arr1.length){
+                        if(countjoin[k]===undefined){
+                            countjoin[k] =1;
+                        }
+                        else{
+                            countjoin[k]++;
+                        }
+                    }
+                }
+            }
+            
+
+
+            var aux=combinazionation(ArNew);
+            for(let i=0;i<aux.length; i++){
+                var v= aux[i];
+                if(countjoin[v]===undefined){
+                    countjoin[v]=0;
+                }
+            }
+            
+            return countjoin;
+            
+        }
+
+        function distribution(){
+            const Sport = [
+            { chiave: 1, valore: 'NoSport' },
+            { chiave: 2, valore: 'Rugby' },
+            { chiave: 3, valore: 'Krav Maga' },
+            { chiave: 4, valore: 'Badminton' },
+            { chiave: 5, valore: 'Rugby' },
+            { chiave: 6, valore: 'Football' },
+            { chiave: 7, valore: 'skiing' },
+            { chiave: 8, valore: 'NoSport' },
+            { chiave: 9, valore: 'NoSport' },
+            { chiave: 10, valore: 'Football' },
+            { chiave: 11, valore: 'NoSport' },
+            { chiave: 12, valore: 'Football' },
+            { chiave: 13, valore: 'Longboard' },
+            { chiave: 14, valore: 'Football' },
+            { chiave: 15, valore: 'Swimming' },
+            { chiave: 16, valore: 'Swimming' },
+            { chiave: 17, valore: 'Tennis' },
+            { chiave: 18, valore: 'Tennis' },
+            { chiave: 19, valore: 'Tennis' },
+            { chiave: 20, valore: 'Gym' },
+            { chiave: 21, valore: 'NoSport' },
+            { chiave: 22, valore: 'Swimming' },
+            { chiave: 23, valore: 'Gym' },
+            { chiave: 24, valore: 'Martial arts' },
+            { chiave: 25, valore: 'Gym' },
+            { chiave: 26, valore: 'Gym' },
+            { chiave: 27, valore: 'Gym' },
+            { chiave: 28, valore: 'Gym' },
+            { chiave: 29, valore: 'Gym' },
+            { chiave: 30, valore: 'Football' },
+            { chiave: 31, valore: 'Gym' },
+            { chiave: 32, valore: 'Gym' },
+            { chiave: 33, valore: 'Yoga' },
+            { chiave: 34, valore: 'Figure skating' },
+            { chiave: 35, valore: 'Climbing' },
+            { chiave: 36, valore: 'Gym' },
+            { chiave: 37, valore: 'Volleyball' },
+            { chiave: 38, valore: 'NoSport' },
+            { chiave: 39, valore: 'Gym' },
+            { chiave: 40, valore: 'NoSport' },
+            { chiave: 41, valore: 'NoSport' },
+            { chiave: 42, valore: 'NoSport' },
+            { chiave: 43, valore: 'Gym' },
+            { chiave: 44, valore: 'Gym' },
+            { chiave: 45, valore: 'Football' },
+            { chiave: 46, valore: 'Football' },
+            { chiave: 47, valore: 'NoSport' },
+            { chiave: 48, valore: 'Gym' },
+            { chiave: 49, valore: 'Gym' },
+            { chiave: 50, valore: 'Gym' },
+            { chiave: 51, valore: 'NoSport' },
+            { chiave: 52, valore: 'Gym' },
+            { chiave: 53, valore: 'Gym' },
+            { chiave: 54, valore: 'NoSport' },
+            { chiave: 55, valore: 'Gym' },
+            { chiave: 56, valore: 'Gym' }
+        ];
+            var numeroVariabili = parseInt(document.getElementById("numeroVariabili").value);
+
+    
+            var interval=[];
+            for(let i=1; i<=numeroVariabili; i++){
+                var elementId = "variabile" + i;
+                var element = document.getElementById(elementId);
+                var valore = parseInt(element.value);
+                interval.push(valore);
+                   
+            }
+
+            variable=[];
+            for (var i = 0; i < numeroVariabili; i++) {
+                
+                var numeroCasualeArr = Array.from({ length: 10 }, () => Math.random()); 
+
+                variable.push(numeroCasualeArr);
+            }
+
+            const countJoin = freqDistrJoin(variable, interval);
+            const results = document.getElementById('res').getElementsByTagName('tbody')[0];
+            results.innerHTML="";
+            const resultsTableSport = document.getElementById('Sport').getElementsByTagName('tbody')[0];
+            resultsTableSport.innerHTML="";
+            const countSport = freqDistr(Sport);
+            const keysArray = Object.keys(countSport);
+            keysArray.sort();
+
+            for (let i = 0; i < keysArray.length; i++) {
+                const key = keysArray[i];
+                const row = resultsTableSport.insertRow();
+                const cell1 = row.insertCell(0);
+                const cell2 = row.insertCell(1);
+                const cell3 = row.insertCell(2);
+                const cell4 = row.insertCell(3);
+                cell1.innerHTML = key;
+                cell2.innerHTML = countSport[key];
+                cell3.innerHTML= (countSport[key]/Sport.length).toFixed(2);
+                cell4.innerHTML= (countSport[key]/Sport.length * 100).toFixed(2) + '%';
+                //
+            }
+
+            const row = resultsTableSport.insertRow();
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            const cell3 = row.insertCell(2);
+            const cell4 = row.insertCell(3);
+            cell1.innerHTML = " ";
+            cell2.innerHTML = Sport.length;
+            cell3.innerHTML=1;
+            cell4.innerHTML= 100 + '%';
+
+            for (const interval in countJoin) {
+                const row = results.insertRow();
+                const cell1 = row.insertCell(0);
+                const cell2 = row.insertCell(1);
+                const cell3 = row.insertCell(2);
+                const cell4 = row.insertCell(3);
+                cell1.innerHTML = interval;
+                cell2.innerHTML = countJoin[interval];
+                cell3.innerHTML= (countJoin[interval]/10).toFixed(2);
+                cell4.innerHTML= (countJoin[interval]/10 * 100).toFixed(2) + '%';;
+            }
+            
+        }
+    </script>
+</body>
+</html>
