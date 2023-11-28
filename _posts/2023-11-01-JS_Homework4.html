@@ -4,6 +4,21 @@
 
 </head>
 <body >  
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+
     <div style="text-align: center; padding-top: 10%;">
         <label for="numeroVariabili">variables number:</label>
         <input type="number" id="numeroVariabili" min="1" value="1" >
@@ -15,21 +30,12 @@
         <div id="inputContainer"></div>
         <div id="button" style="margin-top: 3%;"> </div>
     </div>  
-    <div style="text-align: center;">
-        <h1>frequency distribution </h1>
-            <table align="center" border="1" id="res">
-                <thead>
-                    <tr>
-                        <th>Interval</th>
-                        <th>absolute</th>
-                        <th>relative</th>
-                        <th>percentage</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-    </div>        
+            
+    <div>    
+        <div id="containerTable"> </div>
+
+    </div>
+
     <div style="text-align: center;">
         <h1>frequency distribution of Sport</h1>
         <table align="center" border="1" id="Sport">
@@ -182,6 +188,84 @@
             
         }
 
+        function disegna(variable, interval, label){
+           
+            const countJoin = freqDistrJoin(variable, interval);
+            var container = document.getElementById("containerTable");
+
+            
+            var table = document.createElement("table");
+
+            table.id = "tableContainer";
+            var lab = document.createElement("div");
+            lab.id="label";
+            lab.innerHTML="frequency distribution of "+label;
+
+            var headerRow=document.createElement("tr");
+            var headerRowinitial = document.createElement("tr");
+            var emptyHeaderCell = document.createElement("th");
+            headerRowinitial.appendChild(emptyHeaderCell);
+            
+            var stringVar = label.split("&");
+            
+            var v1= document.createElement("th");
+            v1.textContent=stringVar[1];
+            
+            headerRow.appendChild(v1);
+
+            var thVar2Label = document.createElement("th");
+            
+            thVar2Label.textContent = stringVar[0];
+            
+            
+            headerRowinitial.appendChild(thVar2Label);
+            
+            for (var i = 0; i < interval[0]; i++) {
+                var inizio= (i/interval[0]).toFixed(2);
+                var fine= ((i+1)/interval[0]).toFixed(2);
+
+                var th = document.createElement("th");
+                th.textContent = inizio.toString()+"-"+fine.toString();
+                headerRow.appendChild(th);
+            }
+            table.appendChild(headerRowinitial);
+            table.appendChild(headerRow);
+            
+            for (var i = 0; i<interval[1]; i++) {
+                const row = document.createElement("tr");
+                inizio=(i/interval[1]).toFixed(2);
+                fine= ((i+1)/interval[1]).toFixed(2);
+                var thVar1 = document.createElement("th");
+                var contenuto=inizio.toString()+"-"+fine.toString();
+                thVar1.textContent = contenuto;
+                row.appendChild(thVar1);
+
+                for (var j = 0; j <interval[0]; j++) {
+                    inizio=(j/interval[0]).toFixed(2);
+                    fine= ((j+1)/interval[0]).toFixed(2);
+                    var contenuto2=inizio.toString()+"-"+fine.toString();
+                    var td = document.createElement("td");
+                    var t = contenuto2+" "+ contenuto;
+                    
+                    Object.keys(countJoin).forEach(function(key) {
+                        if (key === t) {
+                            valore = countJoin[key];
+                        }
+                    });
+
+                    var probabilita = (valore/ 10).toFixed(2);
+                    td.textContent = probabilita;
+                    row.appendChild(td);
+                }
+
+                table.appendChild(row);
+            }
+            container.appendChild(lab);
+            container.appendChild(table);
+            
+            return;
+        }
+
         function distribution(){
             const Sport = [
             { chiave: 1, valore: 'NoSport' },
@@ -261,9 +345,7 @@
                 variable.push(numeroCasualeArr);
             }
 
-            const countJoin = freqDistrJoin(variable, interval);
-            const results = document.getElementById('res').getElementsByTagName('tbody')[0];
-            results.innerHTML="";
+            
             const resultsTableSport = document.getElementById('Sport').getElementsByTagName('tbody')[0];
             resultsTableSport.innerHTML="";
             const countSport = freqDistr(Sport);
@@ -281,7 +363,7 @@
                 cell2.innerHTML = countSport[key];
                 cell3.innerHTML= (countSport[key]/Sport.length).toFixed(2);
                 cell4.innerHTML= (countSport[key]/Sport.length * 100).toFixed(2) + '%';
-                //
+    
             }
 
             const row = resultsTableSport.insertRow();
@@ -294,18 +376,33 @@
             cell3.innerHTML=1;
             cell4.innerHTML= 100 + '%';
 
-            for (const interval in countJoin) {
-                const row = results.insertRow();
-                const cell1 = row.insertCell(0);
-                const cell2 = row.insertCell(1);
-                const cell3 = row.insertCell(2);
-                const cell4 = row.insertCell(3);
-                cell1.innerHTML = interval;
-                cell2.innerHTML = countJoin[interval];
-                cell3.innerHTML= (countJoin[interval]/10).toFixed(2);
-                cell4.innerHTML= (countJoin[interval]/10 * 100).toFixed(2) + '%';;
-            }
+            var existingTable = document.getElementById("containerTable");
+
             
+            existingTable.innerHTML="";
+
+            
+            for(var i = 0; i<variable.length; i++ ){
+                
+            
+                
+                
+                for(var j=i+1; j<variable.length;j++){
+                    var arr=[];
+                
+                    arr.push(variable[i]);
+                    var inter=[];
+                    inter.push(interval[i]);
+                    var label="var"+(i+1) +" & "+ "var"+(j+1);
+                  
+                    inter.push(interval[j]);
+                    arr.push(variable[j]);
+                    disegna(arr,inter, label);
+                }
+
+            }
+                
+                        
         }
     </script>
 </body>
