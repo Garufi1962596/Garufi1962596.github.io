@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true
+            }
+        });
+    </script>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+</head>
+
+<body>
+
+    <h2>Brownian motion</h2>
+    <p>The Stochastic Differential Equation (SDE) governing the Arithmetic Brownian Motion is expressed as:</p>
+    <p>\[ dX_{t} = \mu \,dt + \sigma \,dB_{t} \]</p>
+    <p>This equation signifies that during a small or infinitesimal time interval, the process undergoes a change by a constant amount, determined by the length of the period, along with a random component. In this context, the first term represents a trend, often referred to as the drift, while the second term accounts for random fluctuations around the trend and is known as the diffusion term.</p>
+    <br>
+    <p>(more details can be found in theses)</p>
+  
+    <h2>A geometric Brownian motion</h2>
+    <p>A geometric Brownian motion (GBM), also known as exponential Brownian motion, is a continuous-time stochastic process. In this process, the logarithm of a variable that varies randomly follows a Brownian motion (Wiener process) with drift. This model is particularly important in the realm of stochastic processes and finds application in mathematical finance, notably for modeling stock prices within the Black–Scholes model.</p>
+
+    <p>To define a geometric Brownian motion, we turn to a stochastic differential equation (SDE). Let \(S_t\) be the stochastic process we're interested in. The SDE governing the GBM is given by:</p>
+
+    <p>$$ dS_{t} = \mu S_{t}\,dt + \sigma S_{t}\,dW_{t} $$</p>
+
+    <p>Here, \(W_t\) represents a Wiener process or Brownian motion, while \(\mu\) (the percentage drift) and \(\sigma\) (the percentage volatility) are constants. This equation encapsulates the dynamics of the process over continuous time, offering insights into how the variable \(S_t\) evolves based on its current value, drift, volatility, and random fluctuations governed by the Wiener process.</p>
+
+
+   <h2>Ornstein–Uhlenbeck Process</h2>
+
+    <p>
+        The Ornstein–Uhlenbeck process is a mathematical model frequently used in financial mathematics and the physical sciences.
+        It can be thought of as a modification of the continuous-time random walk, or Wiener process, introducing changes that make the process
+        exhibit a tendency to move back towards a central location. This tendency is stronger when the process is farther away from the central location.
+        In essence, it's like a continuous-time version of the discrete-time AR(1) process.
+    </p>
+
+    <p>
+        Mathematically, the Ornstein–Uhlenbeck process \(x_{t}\) is defined by the following stochastic differential equation:
+    </p>
+
+    <p style="text-align: center;">
+        \[ dx_{t} = -\theta \,x_{t}\,dt + \sigma \,dW_{t} \]
+    </p>
+
+    <p>
+        Here, \(\theta > 0\) and \(\sigma > 0\) are parameters, and \(dW_{t}\) denotes the Wiener process.
+        The equation captures the dynamics of the process, describing how \(x_{t}\) changes over time with a tendency to revert towards its mean, influenced by the parameters \(\theta\) and \(\sigma\).
+    </p>
+
+    <h2>The Vasicek model</h2>
+    <p>In the realm of finance, the Vasicek model serves as a mathematical framework for understanding the dynamics of interest rates. This model, categorized as a one-factor short-rate model, explains the movement of interest rates by considering a single source of market risk. Its applications extend to the valuation of interest rate derivatives and have been adapted for use in credit markets.</p>
+
+    <p>The Vasicek model articulates the behavior of instantaneous interest rates through the stochastic differential equation:</p>
+
+    <p style="text-align: center;">
+        \(dr_{t} = a(b-r_{t})\,dt + \sigma \,dW_{t}\)
+    </p>
+
+    <p>Here, \(W_{t}\) represents a Wiener process within the risk-neutral framework, symbolizing the random market risk factor. This process models the continuous introduction of randomness into the system. The standard deviation parameter, \(\sigma\), governs the interest rate's volatility, essentially characterizing the magnitude of instantaneous randomness influx. The typical parameters \(a\), \(b\), \(a\), and \(\sigma\), along with the initial condition \(r_{0}\), collectively define the dynamics of the model.</p>
+
+    <h2>Hull–White Model</h2>
+
+    <p>In the realm of financial mathematics, the Hull–White model serves as a framework for predicting future interest rates. This model, falling under the category of no-arbitrage models, is adept at aligning with the current term structure of interest rates. Its versatility allows for a straightforward translation of the mathematical description of future interest rate evolution onto a tree or lattice. Consequently, interest rate derivatives such as bermudan swaptions can be effectively valued within this model.</p>
+
+    <p>As a short-rate model, the Hull–White model generally follows the dynamics:</p>
+
+    <pre>
+        dr(t) = [θ(t) − α(t)r(t)]dt + σ(t)dW(t)
+    </pre>
+
+    <p>Practitioners may encounter some ambiguity regarding which parameters in the model are time-dependent and how to name the model in various cases. The most widely accepted convention is as follows:</p>
+
+    <ul>
+        <li>If θ has time dependence, it is referred to as the Hull–White model.</li>
+        <li>If both θ and α are time-dependent, it is termed the extended Vasicek model.</li>
+    </ul>
+
+    <h2>Cox–Ingersoll–Ross (CIR) Model</h2>
+
+    <p>In mathematical finance, the Cox–Ingersoll–Ross (CIR) model is utilized to describe the evolution of interest rates. This model, categorized as a "one factor model" or short-rate model, characterizes interest rate movements driven by a single market risk source. It finds application in the valuation of interest rate derivatives.</p>
+
+    <p>The CIR model defines the instantaneous interest rate <span style="font-weight: bold;">r<sub>t</sub></span> with a Feller square-root process. The stochastic differential equation governing this process is:</p>
+
+    <pre>
+        dr<sub>t</sub> = a(b - r<sub>t</sub>)dt + σ√(r<sub>t</sub>)dW<sub>t</sub>
+    </pre>
+
+    <p>Here, <span style="font-weight: bold;">W<sub>t</sub></span> is a Wiener process modeling the random market risk factor, and <span style="font-weight: bold;">a</span>, <span style="font-weight: bold;">b</span>, and <span style="font-weight: bold;">σ</span> are parameters. The parameter <span style="font-weight: bold;">a</span> represents the speed of adjustment to the mean <span style="font-weight: bold;">b</span>, while <span style="font-weight: bold;">σ</span> corresponds to volatility. The drift factor <span style="font-weight: bold;">a(b - r<sub>t</sub>)</span> ensures mean reversion of the interest rate towards the long-run value <span style="font-weight: bold;">b</span>, with the speed of adjustment controlled by the strictly positive parameter <span style="font-weight: bold;">a</span>.</p>
+
+    <p>The standard deviation factor <span style="font-weight: bold;">σ√(r<sub>t</sub>)</span> prevents the possibility of negative interest rates for all positive values of <span style="font-weight: bold;">a</span> and <span style="font-weight: bold;">b</span>.</p>
+
+    <h2>Black–Karasinski Model</h2>
+
+    <p>In the realm of financial mathematics, the Black–Karasinski model serves as a mathematical description of the term structure of interest rates. This model, categorized as a one-factor model, explains interest rate movements driven by a single source of randomness. It falls under the class of no-arbitrage models, meaning it can align with today's zero-coupon bond prices and, in its most general form, prices for a variety of financial instruments such as caps, floors, or European swaptions.</p>
+
+    <p>The primary state variable in this model is the short rate, assumed to follow the stochastic differential equation under the risk-neutral measure:</p>
+
+    <pre>
+        d(ln(r)) = [θ<sub>t</sub> - φ<sub>t</sub>ln(r)]dt + σ<sub>t</sub>dW<sub>t</sub>
+    </pre>
+
+    <p>Here, dW<sub>t</sub> represents a standard Brownian motion. The model implies a log-normal distribution for the short rate, leading to the expectation that the money-market account's expected value is infinite for any maturity.</p>
+
+     <h2>Heston Model</h2>
+
+    <p>In the field of finance, the Heston model, named after Steven L. Heston, serves as a mathematical framework describing the evolution of the volatility of an underlying asset. This model falls into the category of stochastic volatility models, where the volatility of the asset is considered not constant but follows a random process.</p>
+
+    <p>The basic Heston model defines the price of the asset, denoted as <span style="font-weight: bold;">St</span>, through the stochastic process:</p>
+
+    <pre>
+        dSt = μStdt + √(νt)StdWt<sup>S</sup>
+    </pre>
+
+    <p>Here, <span style="font-weight: bold;">νt</span>, the instantaneous variance, is determined by a Feller square-root or CIR process:</p>
+
+    <pre>
+        dνt = κ(θ - νt)dt + ξ√(νt)dWt<sup>ν</sup>
+    </pre>
+
+    <p>Where <span style="font-weight: bold;">Wt<sup>S</sup></span> and <span style="font-weight: bold;">Wt<sup>ν</sup></span> are Wiener processes (continuous random walks) with correlation ρ.</p>
+
+    <p>The model involves five parameters:</p>
+
+    <ul>
+        <li>ν<sub>0</sub>: The initial variance.</li>
+        <li>θ: The long variance or the long-run average variance of the price; as time tends to infinity, the expected value of ν<sub>t</sub> tends to θ.</li>
+        <li>ρ: The correlation of the two Wiener processes.</li>
+        <li>κ: The rate at which ν<sub>t</sub> reverts to θ.</li>
+        <li>ξ: The volatility of the volatility, or 'vol of vol', determining the variance of ν<sub>t</sub>.</li>
+    </ul>
+
+    <h1>Chen Model</h1>
+
+    <p>In the field of finance, the Chen model stands as a mathematical representation describing the evolution of interest rates. Categorized as a "three-factor model" or short-rate model, it elucidates interest rate movements driven by three distinct sources of market risk. Notably, it was the pioneer stochastic mean and stochastic volatility model.</p>
+
+    <p>The dynamics of the instantaneous interest rate are characterized by the following stochastic differential equations:</p>
+
+    <pre>
+        dr<sub>t</sub> = κ(θ<sub>t</sub> - r<sub>t</sub>)dt + √(r<sub>t</sub>)√(σ<sub>t</sub>)dW<sub>1</sub>
+    </pre>
+
+    <pre>
+        dθ<sub>t</sub> = ν(ζ - θ<sub>t</sub>)dt + α√(θ<sub>t</sub>)dW<sub>2</sub>
+    </pre>
+
+    <pre>
+        dσ<sub>t</sub> = μ(β - σ<sub>t</sub>)dt + η√(σ<sub>t</sub>)dW<sub>3</sub>
+    </pre>
+
+    <p>Here, <sub>1</sub>, <sub>2</sub>, and <sub>3</sub> represent three Wiener processes (continuous random walks), each contributing to the dynamics of the corresponding variable. The parameters κ, ν, μ, α, η, ζ, β govern the behavior of the model.</p>
+
+  <br>
+  <br>
+  <br>
+   <p>Below you can find the different links from which I took the various information for writing the topic:</p>
+
+    <ul>
+        <li><a href="https://en.wikipedia.org/" target="_blank">Wikipedia</a></li>
+    </ul>    
+</body>
+
+</html>
