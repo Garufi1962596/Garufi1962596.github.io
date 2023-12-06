@@ -6,58 +6,139 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"> 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script> 
         <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script> 
-        </style>
     </head>
     <body>
         <div style="background-color: white; text-align: center; align-items: center; width:93vw; margin-top: 20px; margin-left:3.5vw ;">
             <br>
             <h2>Homework 7</h2>
-            <h6>The group of students who implemented the source code is composed by: Noemi Giustini, Filippo Olimpieri, Filippo Guerra and Ludovica Garufi </h6>
-            <br>
             <br>
             <form id="f1">
                 <div class="form-group">
-                    <div style="display: flex; align-items: center; padding-left: 33vw;">
-                        <label for="numberN" style="margin-right: 10px;">N:</label>
-                        <input type="text" class="form-control" style="max-width: 25vw; margin-right: 3vw;" id="numberN" placeholder="Insert the number of intervals:" required value="30"> 
-                    </div>
-                    <br>
-                    <div style="display: flex; align-items: center; padding-left: 33vw;">
-                        <label for="numberM" style="margin-right: 10px;">M:</label>
-                        <input type="text" class="form-control" style="max-width: 25vw; margin-right: 3vw;" id="numberM" placeholder="Insert the number of systems:" required value="20"> 
-                    </div>  
-                    <br>
-                    <div style="display: flex; align-items: center; padding-left: 29vw;">
-                        <label for="Probability" style="margin-right: 10px;">Probability:</label>
-                        <input type="text" class="form-control" style="max-width: 25vw; margin-right: 3vw;" id="Probability" placeholder="Insert the attack ratio:" required value="0.5"> 
-                    </div> 
-                    <br>
-                    <div style="display: flex; align-items: center; padding-left: 26vw;">
-                        <label for="numberA" style="margin-right: 10px;">Attack Histogram:</label>
-                        <input type="text" class="form-control" style="max-width: 25vw; margin-right: 3vw;" id="numberA" placeholder="Insert attack's number for the instogram:" required value="10"> 
-                    </div>  
-                    <br>
-                    <div style="display: flex; align-items: center; padding-left: 27.7vw;"> 
-                        <label for="selectOption" style="margin-right: 10px;">Select Option:</label> 
-                        <select class="form-select" id="selectOption" style="max-width: 25vw; margin-right: 3vw;"> 
-                            <option value="option1">Bernoulli</option> 
-                            <option value="option2">Randomwalk</option> 
-                            <option value="option3">Brownian Motion</option> 
-                        </select> 
-                    </div>
+                    <table align="center">
+                        <tr>
+                            <td><label for="selectOption" style="margin-right: 10px;">Select Option:</label> </td>
+                            <td>
+                                <select class="form-select" id="selectOption" style="max-width: 25vw; margin-right: 3vw;"> 
+                                    <option value="option1">Bernoulli</option> 
+                                    <option value="option2">Randomwalk</option> 
+                                    <option value="option4">Poisson</option> 
+                                    <option value="option3">General Brownian Motion</option>                      
+                                </select> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label id="labelnumberN" for="numberN" style="margin-right: 10px;">N:</label></td>
+                            <td><input type="text" class="form-control" style="max-width: 25vw; margin-right: 3vw;" id="numberN" placeholder="Insert the number of intervals:" required value="30"> </td>
+                        
+                        </tr>
+                        <tr>
+                            <td><label id="labelnumberM" for="numberM" style="margin-right: 10px;">M:</label></td>
+                            <td><input type="text" class="form-control" style="max-width: 25vw; margin-right: 3vw;" id="numberM" placeholder="Insert the number of systems:" required value="20"> </td>
+                        </tr>  
+                        <tr>
+                            <td><label id="labelProbability" for="Probability" style="margin-right: 10px;">Probability:</label></td>
+                            <td><input type="text" class="form-control" style="max-width: 25vw; margin-right: 3vw;" id="Probability" placeholder="Insert the attack ratio:" required value="0.5"> </td>
+                        </tr> 
+                        <tr>
+                            <td><label id="labelnumberA" for="numberA" style="margin-right: 10px;">Attack Histogram:</label></td>
+                            <td><input type="text" class="form-control" style="max-width: 25vw; margin-right: 3vw;" id="numberA" placeholder="Insert attack's number for the instogram:" required value="10"> </td>
+                        </tr> 
+                        <tr>
+                            <td><label id="labelLambda" for="Lambda" style="margin-right: 10px;">Lambda:</label></td>
+                            <td><input type="text" class="form-control" style="max-width: 25vw; margin-right: 3vw;" id="Lambda" placeholder="Insert the value of Lambda:" required value="10"> </td>
+                        </tr>
+                    </table> 
                     <br>
                     <div style="display: flex; align-items: center;"></div>
-                    <button type="button" class="btn btn-primary" style="color: white;" onclick="collectData()"> Send </button>  
-                  
+                    <button type="button" class="btn btn-success" style="color: white;" onclick="collectData()"> Send </button>  
                     </div> 
                     <br>
                     <canvas id="myCanvas" style="background-color: rgb(236 236 236 / 94%); align-self: center;"></canvas> 
-                    <br>                                      
+                    <br>                                     
                 </div>
                 <br>
             </form>
         </div>
     </body>
+        <script>
+
+            function showOrHideInput(numberN, numberM, Probability, numberA, Lambda, sigmaValue, muValue, thetaValue, kValue){
+                document.getElementById("numberN").disabled = numberN;
+                document.getElementById("numberM").disabled = numberM;
+                document.getElementById("Probability").disabled = Probability;
+                document.getElementById("numberA").disabled = numberA;
+                document.getElementById("Lambda").disabled = Lambda;
+
+                if(!numberN){
+                    document.getElementById("numberN").style.display = "block";
+                    document.getElementById("labelnumberN").style.display = "block";
+                }else{
+                    document.getElementById("numberN").style.display = "none";
+                    document.getElementById("labelnumberN").style.display = "none";
+                }
+
+                if(!numberM){
+                    document.getElementById("numberM").style.display = "block";
+                    document.getElementById("labelnumberM").style.display = "block";
+                }else{
+                    document.getElementById("numberM").style.display = "none";
+                    document.getElementById("labelnumberM").style.display = "none";
+                }
+
+                if(!Probability){
+                    document.getElementById("Probability").style.display = "block";
+                    document.getElementById("labelProbability").style.display = "block";
+                }else{
+                    document.getElementById("Probability").style.display = "none";
+                    document.getElementById("labelProbability").style.display = "none";
+                }
+
+                if(!numberA){
+                    document.getElementById("numberA").style.display = "block";  
+                    document.getElementById("labelnumberA").style.display = "block";   
+                }else{
+                    document.getElementById("numberA").style.display = "none";  
+                    document.getElementById("labelnumberA").style.display = "none";  
+                }
+
+                if(!Lambda){
+                    document.getElementById("Lambda").style.display = "block";
+                    document.getElementById("labelLambda").style.display = "block";
+                }else{
+                    document.getElementById("Lambda").style.display = "none";
+                    document.getElementById("labelLambda").style.display = "none";
+                }
+            }
+
+            let option = document.getElementById("selectOption").value;
+            if(option == "option1"){    //bernoulli N, M, P
+                showOrHideInput(false, false, false, false, true, true, true, true, true);     
+            }
+            if(option == "option2"){ //randomwalk N, M, P
+                showOrHideInput(false, false, false, false, true, true, true, true, true);
+            }
+            if(option == "option3"){ //general brawnian motion N, M, P
+                showOrHideInput(false, false, false, false, true, true, true, true, true); 
+            }
+            if(option == "option4"){ //poisson N, M, lambda
+                showOrHideInput(false, false, true, false, false, true, true, true, true);        
+            }
+            document.getElementById("selectOption").addEventListener("change", function() {
+                let option = document.getElementById("selectOption").value;
+                if(option == "option1"){    //bernoulli N, M, P
+                    showOrHideInput(false, false, false, false, true, true, true, true, true);  
+                }
+                if(option == "option2"){ //randomwalk N, M, P
+                    showOrHideInput(false, false, false, false, true, true, true, true, true);
+                }
+                if(option == "option3"){ //general brawnian motion N, M, P
+                    showOrHideInput(false, false, false, false, true, true, true, true, true); 
+                }
+                if(option == "option4"){ //poisson N, M, lambda
+                    showOrHideInput(false, false, true, false, false, true, true, true, true);
+                }
+            });
+        </script>
         <script>
             "use strict";
             function setCanvasWidthToScreenWidth() {
@@ -102,7 +183,7 @@
                 draw() {
                     let numRows = 2 * N;
                     let numCols = N;
-                    if(selectOption.value != "option3"){
+                    if(!continuosOptions.includes(selectOption.value)){
                         this.drawGrid(this.gridXini, this.gridXfin, this.gridYini, this.gridYfin, numRows, numCols, Math.abs((this.gridYfin-this.gridYini)/numRows), Math.abs((this.gridXfin-this.gridXini)/numCols));
                     }else{
                         this.drawGrid(this.gxi, this.gxf, this.gyi, this.gyf, numRows, numCols, Math.abs((this.gridYfin-this.gridYini)/numRows), Math.abs((this.gridXfin-this.gridXini)/numCols));
@@ -111,7 +192,7 @@
                     drawRectanglePerimeter(this);
                     drawHistogram(this,A, dataForHistogram, labelsForHistogram);
                     drawHistogram(this, N, dataForHistogramFine, labelsForHistogramFine);
-                    if(selectOption.value != "option3"){
+                    if(!continuosOptions.includes(selectOption.value)){
                         this.drawAxes(this.gridXini, this.gridXfin, this.gridYini, this.gridYfin);
                     }else{
                         this.drawAxes(this.gxi, this.gxf, this.gyi, this.gyf);
@@ -237,7 +318,7 @@
                 }
         
                 zoom(scale) {
-                    if(selectOption.value != "option3"){
+                    if(!continuosOptions.includes(selectOption.value)){
                         let fattoreScala = (this.gridXfin-this.gridXini)/(this.gridYfin - this.gridYini) * N;
                         if(this.gridXini - fattoreScala*scale < this.gridXfin + fattoreScala*scale){
                             this.gridXini -= fattoreScala*scale;
@@ -265,7 +346,7 @@
                 }
         
                 moveRect(dx, dy) {
-                    if(selectOption.value != "option3"){
+                    if(!continuosOptions.includes(selectOption.value)){
                         if(this.x + dx >= 0 && this.y + dy >= 0 && this.x + this.width + dx <= canvas.width && this.y + this.height + dy <= canvas.height){
                             this.x += dx;
                             this.y += dy;
@@ -305,7 +386,7 @@
         
             var N = 0;
             var M = 0;
-            var Lambda = 0;
+            var lambda = 0;
             var A = 0;
             var P = 0;
             var dataCollector = [];
@@ -321,6 +402,7 @@
             var dataForHistogramFine;
             var labelsForHistogramFine;
             let maxRows = 0;
+            let continuosOptions = ["option3"];
                 
             const rect2 = new Rect(80, 30, 800, 400, 2);
         
@@ -335,7 +417,7 @@
         
             function histogramData(pos){
                 "use strict";
-                if(selectOption.value != "option3"){
+                if(!continuosOptions.includes(selectOption.value)){
                     count={};
                     var errore = 0;
                     for(var m = 0; m < M; m++){
@@ -410,7 +492,7 @@
             function findMinandMax(){
                 let min = parseFloat("Infinity");
                 let max = -parseFloat("Infinity");
-                if(selectOption.value == "option3"){
+                if(continuosOptions.includes(selectOption.value)){
                     for(let m = 0; m < M; m++){
                         for(let n = 0; n < N; n++){
                             if(dataCollector[m][1][n] > max){
@@ -436,6 +518,7 @@
                 M = parseInt(document.getElementById("numberM").value);
                 P = parseFloat(document.getElementById("Probability").value);
                 A = parseInt(document.getElementById("numberA").value);
+                lambda = parseInt(document.getElementById("Lambda").value);
 
                 dataCollector=[new Array(M).fill(0)];
                 drawDataset = [];
@@ -474,7 +557,7 @@
                             }
                         }
 
-                        if(selectOption.value=="option3"){
+                        if(selectOption.value=="option3"){  //general brawnian motion
                             const mu = N * P;
                             const sigma = Math.sqrt(N * P * (1 - P));
                             const u1 = Math.random();
@@ -485,6 +568,15 @@
                                 result2 = (1/Math.sqrt(N))*ris;
                             }else{
                                 result2 = -(1/Math.sqrt(N))*ris;
+                            }
+                        }
+
+                        if(selectOption.value=="option4"){  //Poisson
+                            P = lambda / N;
+                            if(randomNumber <= P){
+                                result2 = 1;
+                            }else{
+                                result2 = 0;
                             }
                         }
                         
@@ -513,7 +605,7 @@
                 histogramData(N);
 
 
-                if(selectOption.value == "option3"){
+                if(continuosOptions.includes(selectOption.value)){
                     rect2.gxi = rect2.gridXini;
                     rect2.gxf = rect2.gridXfin;
                     rect2.gyi = rect2.gridYini - (((rect2.gridYfin-rect2.gridYini)/2)/N)*min_max;
@@ -650,7 +742,7 @@
             }
         
             function addIfAlreadyDraw(m, n, passoX, passoY, v){
-                if(selectOption.value!="option3"){
+                if(!continuosOptions.includes(selectOption.value)){
                     if(v == 0){
                         if(dataCollector[m][1][n] - dataCollector[m][1][n-1] > 0){    //la linea è salita
                             let riga = dataCollector[m][1][n] - passoY;
@@ -674,7 +766,7 @@
             }
 
             function checkIfAlreadyDraw(m, n, passoX, passoY){
-                if(selectOption.value != "option3"){
+                if(!continuosOptions.includes(selectOption.value)){
                     if(dataCollector[m][1][n] - dataCollector[m][1][n-1] > 0){    //la linea è salita
                         let riga = dataCollector[m][1][n] - passoY;
                         let colonna = n - passoX;
@@ -706,7 +798,7 @@
             }
 
             function drawn(m, n){
-                if(selectOption.value != "option3"){
+                if(!continuosOptions.includes(selectOption.value)){
                     if(drawDataset[dataCollector[m][1][n]][n] == 0){
                         return true;
                     }else{
@@ -719,7 +811,7 @@
 
             function drawHistogram(rect, pos, data, labels){
                 "use strict";
-                if(selectOption.value != "option3"){
+                if(!continuosOptions.includes(selectOption.value)){
                     let factorX = (rect.gridXfin - rect.gridXini)/N;
                     let factorY = ((rect.gridYfin - rect.gridYini)/2)/N;
                     let factorXHistogram = ((rect.gridXfin - rect.gridXini) / N);
@@ -974,10 +1066,19 @@
                 "use strict";
                 clearRectangle(rect);
         
-                rect.gridXfin += mouseX - lastMouseX;
-                rect.gridYfin += mouseY - lastMouseY;
-                rect.width += mouseX - lastMouseX;
-                rect.height += mouseY - lastMouseY;
+                if(continuosOptions.includes(selectOption.value)){ 
+                    rect.gridXfin += mouseX - lastMouseX; 
+                    rect.gridYfin += mouseY - lastMouseY; 
+                    rect.gxf += mouseX - lastMouseX; 
+                    rect.gyf += mouseY - lastMouseY; 
+                    rect.width += mouseX - lastMouseX; 
+                    rect.height += mouseY - lastMouseY; 
+                }else{ 
+                    rect.gridXfin += mouseX - lastMouseX; 
+                    rect.gridYfin += mouseY - lastMouseY; 
+                    rect.width += mouseX - lastMouseX; 
+                    rect.height += mouseY - lastMouseY; 
+                }
                 drawRectanglePerimeter(rect);
             }
         
